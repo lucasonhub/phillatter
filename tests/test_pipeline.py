@@ -6,8 +6,9 @@ import unittest
 from datetime import date, timedelta
 from unittest.mock import patch
 import xml.etree.ElementTree as ET
+import requests
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from collect import arxiv_records, collect, collect_openalex, inverted_abstract, read_note, save_records
+from collect import Client, arxiv_records, collect, collect_openalex, inverted_abstract, read_note, save_records
 from render_site import render
 
 
@@ -87,6 +88,17 @@ class PipelineTest(unittest.TestCase):
                 return Response({'meta': {'count': 6000}, 'results': []})
         with self.assertRaisesRegex(RuntimeError, 'no dia 2026-10-08'):
             collect_openalex(Client(), 'mind', 'Mente', date(2026, 10, 8), date(2026, 10, 9), 'test', 5000)
+
+    def test_network_error_identifies_host_without_exposing_key(self):
+        client = Client('test@example.org')
+        error = requests.exceptions.RetryError('https://api.openalex.org/works?api_key=PRIVATE: too many 503 error responses')
+        with patch.object(client.s, 'get', side_effect=error):
+            with self.assertRaises(RuntimeError) as caught:
+                client.get('https://api.openalex.org/works', {'api_key': 'PRIVATE'})
+        self.assertIn('api.openalex.org', str(caught.exception))
+        self.assertIn('HTTP 503', str(caught.exception))
+        self.assertNotIn('PRIVATE', str(caught.exception))
+        self.assertNotIn('api_key', str(caught.exception))
 
     def test_dedup_markdown_and_rss(self):
         with tempfile.TemporaryDirectory() as tmp:

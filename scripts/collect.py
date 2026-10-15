@@ -200,6 +200,7 @@ def philpapers_records(content, category, start, end, observed_on=None):
 def collect_philpapers(client, config, start, end):
     records = []
     for settings in config.get('philpapers', []):
+        print(f"Consultando PhilPapers: {settings['category']}", flush=True)
         url = settings.get('feed_url') or discover_philpapers_feed(client, settings['page_url'])
         response = client.get(philpapers_url(url), {})
         records.extend(philpapers_records(response.content, settings['category'], start, end))
@@ -220,7 +221,14 @@ class Client:
         if 'arxiv.org' in url:
             time.sleep(max(0, 3.2 - (time.monotonic() - self.last_arxiv)))
             self.last_arxiv = time.monotonic()
-        r = self.s.get(url, params=params, timeout=(15, 90))
+        try:
+            r = self.s.get(url, params=params, timeout=(15, 90))
+        except requests.RequestException as exc:
+            # Somente host e classe; a URL e a mensagem original podem conter a chave.
+            code = re.search(r'too many (\d{3}) error responses', str(exc))
+            status = f'; HTTP {code.group(1)}' if code else ''
+            raise RuntimeError(f'Falha de rede em {urlparse(url).hostname}: '
+                               f'{type(exc).__name__}{status}. Nenhuma edição foi gravada.') from None
         # Não imprimir URL: ela contém a chave OpenAlex.
         if not r.ok:
             raise RuntimeError(f'Falha HTTP {r.status_code} em {urlparse(url).hostname}')
@@ -248,7 +256,7 @@ def collect_openalex(client, term, category, start, end, key, limit):
                                    f'refine a busca ou aumente max_results_per_query (atual: {limit}).')
             middle = start + timedelta(days=days // 2)
             print(f'OpenAlex: dividindo janela de {category} ({start} até {end}, fim exclusivo); '
-                  f'{total} resultados.')
+                  f'{total} resultados.', flush=True)
             return (collect_openalex(client, term, category, start, middle, key, limit) +
                     collect_openalex(client, term, category, middle, end, key, limit))
         batch = data['results']
@@ -270,8 +278,10 @@ def collect(client, config, start, end):
     if not isinstance(limit, int) or isinstance(limit, bool) or limit < 1:
         raise ValueError('max_results_per_query deve ser um inteiro positivo')
     for category, queries in config['categories'].items():
+        print(f'Consultando OpenAlex: {category}', flush=True)
         for term in queries['openalex']:
             records.extend(collect_openalex(client, term, category, start, end, key, limit))
+        print(f'Consultando arXiv: {category}', flush=True)
         offset = 0
         # O último minuto do dia anterior mantém o intervalo sem sobreposição.
         query = f"({queries['arxiv']}) AND submittedDate:[{start:%Y%m%d}0000 TO {until:%Y%m%d}2359]"
@@ -368,6 +378,8 @@ def main():
     start = args.end - timedelta(days=args.days)
     try:
         records = collect(Client(contact), config, start, args.end)
+    except RuntimeError as exc:
+        raise SystemExit(str(exc)) from None
     except requests.RequestException:
         raise SystemExit('Falha de rede; nenhuma edição foi gravada. Consulte as APIs sem expor a chave.')
     ids = save_records(records, ROOT)
