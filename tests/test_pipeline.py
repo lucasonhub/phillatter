@@ -3,11 +3,11 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
-from datetime import date
+from datetime import date, timedelta
 from unittest.mock import patch
 import xml.etree.ElementTree as ET
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from collect import arxiv_records, collect, inverted_abstract, read_note, save_records
+from collect import arxiv_records, collect, collect_openalex, inverted_abstract, read_note, save_records
 from render_site import render
 
 
@@ -60,6 +60,33 @@ class PipelineTest(unittest.TestCase):
         with patch.dict('os.environ', {'OPENALEX_API_KEY': 'test'}):
             with self.assertRaises(RuntimeError):
                 collect(Client(), {'categories': {'IA': {'openalex': ['a'], 'arxiv': 'a'}}}, date(2026, 10, 8), date(2026, 10, 15))
+
+    def test_openalex_splits_without_gaps_or_duplicates(self):
+        accepted_windows = []
+        class Client:
+            def get(self, url, params):
+                pieces = dict(p.split(':', 1) for p in params['filter'].split(','))
+                first = date.fromisoformat(pieces['from_publication_date'])
+                last = date.fromisoformat(pieces['to_publication_date'])
+                days = (last - first).days + 1
+                if days <= 2:
+                    accepted_windows.append((first, last))
+                rows = [dict(id=f'W{first + timedelta(days=i)}', title='Mind', type='article',
+                             publication_date=str(first + timedelta(days=i))) for i in range(days)]
+                return Response({'meta': {'count': days, 'next_cursor': None}, 'results': rows})
+        start, end = date(2026, 10, 8), date(2026, 10, 15)
+        rows = collect_openalex(Client(), 'mind', 'Mente', start, end, 'test', 2)
+        expected = [str(start + timedelta(days=i)) for i in range(7)]
+        self.assertEqual([r['date'] for r in rows], expected)
+        self.assertEqual(len({r['source_ids'][0] for r in rows}), 7)
+        self.assertTrue(all((b - a).days < 2 for a, b in accepted_windows))
+
+    def test_openalex_single_day_limit_is_explicit(self):
+        class Client:
+            def get(self, url, params):
+                return Response({'meta': {'count': 6000}, 'results': []})
+        with self.assertRaisesRegex(RuntimeError, 'no dia 2026-10-08'):
+            collect_openalex(Client(), 'mind', 'Mente', date(2026, 10, 8), date(2026, 10, 9), 'test', 5000)
 
     def test_dedup_markdown_and_rss(self):
         with tempfile.TemporaryDirectory() as tmp:

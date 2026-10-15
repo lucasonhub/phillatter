@@ -227,6 +227,39 @@ class Client:
         return r
 
 
+def collect_openalex(client, term, category, start, end, key, limit):
+    """Pagina [start, end); divide janelas grandes, sem truncar resultados."""
+    records = []
+    cursor, seen, count = '*', set(), 0
+    until = end - timedelta(days=1)
+    while cursor:
+        if cursor in seen:
+            raise RuntimeError('Cursor repetido no OpenAlex')
+        seen.add(cursor)
+        data = client.get('https://api.openalex.org/works', dict(
+            search=term,
+            filter=f'from_publication_date:{start},to_publication_date:{until},type:article|book|dissertation',
+            cursor=cursor, per_page=200, api_key=key)).json()
+        total = data['meta']['count']
+        if total > limit:
+            days = (end - start).days
+            if days <= 1:
+                raise RuntimeError(f'OpenAlex: {category} tem {total} resultados no dia {start}; '
+                                   f'refine a busca ou aumente max_results_per_query (atual: {limit}).')
+            middle = start + timedelta(days=days // 2)
+            print(f'OpenAlex: dividindo janela de {category} ({start} até {end}, fim exclusivo); '
+                  f'{total} resultados.')
+            return (collect_openalex(client, term, category, start, middle, key, limit) +
+                    collect_openalex(client, term, category, middle, end, key, limit))
+        batch = data['results']
+        records.extend(openalex_record(w, category) for w in batch)
+        count += len(batch)
+        if count > limit:
+            raise RuntimeError('OpenAlex excedeu o limite durante a paginação; tente novamente.')
+        cursor = data['meta'].get('next_cursor') if batch else None
+    return records
+
+
 def collect(client, config, start, end):
     records = []
     key = os.environ.get('OPENALEX_API_KEY')
@@ -234,24 +267,11 @@ def collect(client, config, start, end):
         raise RuntimeError('Defina OPENALEX_API_KEY (chave gratuita da conta OpenAlex).')
     until = end - timedelta(days=1)
     limit = config.get('max_results_per_query', 5000)
+    if not isinstance(limit, int) or isinstance(limit, bool) or limit < 1:
+        raise ValueError('max_results_per_query deve ser um inteiro positivo')
     for category, queries in config['categories'].items():
         for term in queries['openalex']:
-            cursor, seen, count = '*', set(), 0
-            while cursor:
-                if cursor in seen:
-                    raise RuntimeError('Cursor repetido no OpenAlex')
-                seen.add(cursor)
-                data = client.get('https://api.openalex.org/works', dict(
-                    search=term, filter=f'from_publication_date:{start},to_publication_date:{until},type:article|book|dissertation',
-                    cursor=cursor, per_page=200, api_key=key)).json()
-                if data['meta']['count'] > limit:
-                    raise RuntimeError(f'OpenAlex: refine a busca de {category}; limite {limit}')
-                batch = data['results']
-                records.extend(openalex_record(w, category) for w in batch)
-                count += len(batch)
-                if count > limit:
-                    raise RuntimeError('OpenAlex excedeu o limite configurado')
-                cursor = data['meta'].get('next_cursor') if batch else None
+            records.extend(collect_openalex(client, term, category, start, end, key, limit))
         offset = 0
         # O último minuto do dia anterior mantém o intervalo sem sobreposição.
         query = f"({queries['arxiv']}) AND submittedDate:[{start:%Y%m%d}0000 TO {until:%Y%m%d}2359]"
