@@ -115,7 +115,17 @@ tags:
 
 ## Alertas PhilPapers (RSS/Atom)
 
-O coletor usa **feedparser** para as categorias **Philosophy of Mind** e **Philosophy of Cognitive Science**, associadas no site a `Filosofia da Mente` e `Filosofia da Ciência Cognitiva`. A segunda é uma categoria própria para preservar o recorte filosófico.
+O coletor usa **feedparser** para cinco categorias do PhilPapers:
+
+| Categoria no PhilPapers | Categoria no site |
+| --- | --- |
+| Philosophy of Mind | Filosofia da Mente |
+| Philosophy of Cognitive Science | Filosofia da Ciência Cognitiva |
+| Theory of Computation | Teoria da Computação |
+| Computationalism | Computacionalismo |
+| Philosophy of Consciousness | Filosofia da Consciência |
+
+As três últimas foram adicionadas às duas originais. Os filtros e as tags do site são gerados automaticamente quando houver publicações coletadas nessas categorias. A configuração das páginas não confirma que os feeds estejam acessíveis: a descoberta do RSS no GitHub Actions continua pendente.
 
 Em `topics.yml`, cada fonte tem `page_url`, `category` e `feed_url`. Com `feed_url: null`, o script abre a página oficial e procura o formulário `allparams` usado pelo botão RSS que chama `/utils/feed.pl`. Ele lê os campos da própria página e reproduz as alterações `noheader=1`, `__action` e `format` vazio na URL de consulta, sem executar JavaScript. Também aceita um único link RSS/Atom tradicional anunciado na página. Isso evita inventar IDs numéricos de categorias. Se não houver um único link identificável, a coleta falha com uma instrução para copiar o endereço do RSS oferecido pela categoria para `feed_url`. O suporte ao formulário foi testado com HTML simulado baseado no botão RSS observado no site. A confirmação ao vivo continua necessária: a política de rede deste ambiente não permite `philpapers.org`. O parser e a integração foram testados com feeds simulados.
 
@@ -123,6 +133,9 @@ Você pode fixar os endereços reais em `feed_url`, copiados do link de RSS em c
 
 - https://philpapers.org/browse/philosophy-of-mind
 - https://philpapers.org/browse/philosophy-of-cognitive-science
+- https://philpapers.org/browse/theory-of-computation
+- https://philpapers.org/browse/computationalism
+- https://philpapers.org/browse/philosophy-of-consciousness
 
 A busca das páginas só é necessária enquanto `feed_url` estiver vazio. O trecho `/utils/feed.pl` sozinho não identifica a categoria: são necessários os campos do formulário. Os feeds são verificados antes das APIs, para falhar cedo se a descoberta não funcionar. O download usa a mesma sessão HTTP, timeouts e retries das APIs; `feedparser` recebe os bytes baixados, sem abrir conexões por conta própria. Feeds inválidos ou respostas HTML interrompem a execução antes da gravação. Não há alteração necessária no workflow: ele instala o arquivo de dependências atualizado e executa o mesmo coletor.
 

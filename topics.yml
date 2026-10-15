@@ -21,3 +21,12 @@ philpapers:
   - category: Filosofia da Ciência Cognitiva
     page_url: https://philpapers.org/browse/philosophy-of-cognitive-science
     feed_url: null
+  - category: Teoria da Computação
+    page_url: https://philpapers.org/browse/theory-of-computation
+    feed_url: null
+  - category: Computacionalismo
+    page_url: https://philpapers.org/browse/computationalism
+    feed_url: null
+  - category: Filosofia da Consciência
+    page_url: https://philpapers.org/browse/philosophy-of-consciousness
+    feed_url: null
