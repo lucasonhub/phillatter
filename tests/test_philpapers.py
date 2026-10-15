@@ -1,5 +1,6 @@
 from datetime import date
 from pathlib import Path
+from urllib.parse import urlparse, parse_qs
 import sys
 import tempfile
 import unittest
@@ -70,6 +71,46 @@ class PhilPapersTest(unittest.TestCase):
                 def get(self, *args):
                     return type('R', (), {'text': '<html>No RSS</html>'})()
             discover_philpapers_feed(NoRSS(), 'https://philpapers.org/browse/philosophy-of-mind')
+
+    def test_discovers_feed_generated_by_rss_button(self):
+        page = """<form id="allparams" action="/browse/philosophy-of-mind">
+          <input name="cId" value="CATEGORY_FROM_PAGE">
+          <input name="filterByAreas[]" value="one">
+          <input name="filterByAreas[]" value="two">
+          <input id="ap-c1" name="placeholder1" value="">
+          <input id="ap-c2" name="placeholder2" value="">
+          <input id="ap-format" name="format" value="html">
+          <input name="ignored" value="x" disabled>
+          <input type="checkbox" name="unchecked" value="yes">
+        </form><span onclick="submitTo($('allparams'),'/utils/feed.pl')">RSS feed</span>"""
+        calls = []
+        class Client:
+            def get(self, url, params):
+                calls.append(url)
+                return type('R', (), {'text': page, 'content': feed(item())})()
+        client = Client()
+        url = discover_philpapers_feed(client, 'https://philpapers.org/browse/philosophy-of-mind')
+        self.assertEqual(urlparse(url).path, '/utils/feed.pl')
+        params = parse_qs(urlparse(url).query, keep_blank_values=True)
+        self.assertEqual(params['cId'], ['CATEGORY_FROM_PAGE'])
+        self.assertEqual(params['noheader'], ['1'])
+        self.assertEqual(params['__action'], ['https://philpapers.org/browse/philosophy-of-mind'])
+        self.assertEqual(params['format'], [''])
+        self.assertEqual(params['filterByAreas[]'], ['one', 'two'])
+        self.assertNotIn('placeholder1', params)
+        self.assertNotIn('placeholder2', params)
+        self.assertNotIn('ignored', params)
+        self.assertNotIn('unchecked', params)
+        rows = collect_philpapers(client, {'philpapers': [{'category': 'Mente', 'page_url': 'https://philpapers.org/browse/philosophy-of-mind'}]}, START, END)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(calls[-1], url)
+
+    def test_does_not_invent_category_for_incomplete_form(self):
+        class Client:
+            def get(self, *args):
+                return type('R', (), {'text': '<form id="allparams"></form><span>/utils/feed.pl</span>'})()
+        with self.assertRaises(RuntimeError):
+            discover_philpapers_feed(Client(), 'https://philpapers.org/browse/philosophy-of-mind')
 
     def test_collection_integration_and_dedup(self):
         class Client:

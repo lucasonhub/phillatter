@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 import re
 import time
-from urllib.parse import quote, urlparse, urljoin
+from urllib.parse import quote, urlparse, urljoin, urlencode
 import xml.etree.ElementTree as ET
 
 import feedparser
@@ -103,9 +103,16 @@ class FeedHTML(HTMLParser):
         self.text = []
         self.feeds = set()
         self.hidden = 0
+        self.forms = []
+        self.current_form = None
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == 'form':
+            self.current_form = {'attrs': attrs, 'controls': []}
+            self.forms.append(self.current_form)
+        elif tag == 'input' and self.current_form is not None:
+            self.current_form['controls'].append(attrs)
         if tag in ('script', 'style'):
             self.hidden += 1
         href = attrs.get('href', '')
@@ -117,6 +124,8 @@ class FeedHTML(HTMLParser):
             self.text.append(' ')
 
     def handle_endtag(self, tag):
+        if tag == 'form':
+            self.current_form = None
         if tag in ('script', 'style'):
             self.hidden = max(0, self.hidden - 1)
         self.text.append(' ')
@@ -139,6 +148,44 @@ def philpapers_url(url):
     return url
 
 
+def philpapers_form_feed(parser, page_url, page_html):
+    """Reproduz os campos alterados pelo botão RSS; não executa JavaScript."""
+    if '/utils/feed.pl' not in page_html:
+        return None
+    forms = [f for f in parser.forms if f['attrs'].get('id') == 'allparams' or
+             f['attrs'].get('name') == 'allparams']
+    if len(forms) != 1:
+        return None
+    form = forms[0]
+    controls = form['controls']
+    ids = {c.get('id') for c in controls}
+    if not {'ap-c1', 'ap-c2', 'ap-format'} <= ids:
+        return None
+    # O botão renomeia os controles ap-c1/ap-c2 e esvazia ap-format.
+    action = urljoin(page_url, form['attrs'].get('action') or page_url)
+    pairs = []
+    for control in controls:
+        if 'disabled' in control:
+            continue
+        kind = control.get('type', 'text').lower()
+        if kind in ('button', 'submit', 'reset', 'file', 'image'):
+            continue
+        if kind in ('radio', 'checkbox') and 'checked' not in control:
+            continue
+        name, value = control.get('name'), control.get('value', '')
+        identifier = control.get('id')
+        if identifier == 'ap-c1':
+            name, value = 'noheader', '1'
+        elif identifier == 'ap-c2':
+            name, value = '__action', action
+        elif identifier == 'ap-format':
+            value = ''
+        if name:
+            pairs.append((name, value))
+    # feed.pl é uma consulta: a URL GET carrega os mesmos campos do formulário.
+    return philpapers_url(urljoin(page_url, '/utils/feed.pl') + '?' + urlencode(pairs))
+
+
 def discover_philpapers_feed(client, page_url):
     page_url = philpapers_url(page_url)
     response = client.get(page_url, {})
@@ -146,6 +193,9 @@ def discover_philpapers_feed(client, page_url):
     parser.feed(response.text)
     candidates = {urljoin(page_url, href) for href in parser.feeds}
     candidates = {u for u in candidates if urlparse(u).hostname in ('philpapers.org', 'www.philpapers.org')}
+    form_feed = philpapers_form_feed(parser, page_url, response.text)
+    if form_feed:
+        return form_feed
     if len(candidates) != 1:
         raise RuntimeError('Não foi possível identificar um único RSS da categoria PhilPapers. '
                            'Copie o endereço do RSS da categoria para feed_url em topics.yml.')
@@ -277,6 +327,7 @@ def collect(client, config, start, end):
     limit = config.get('max_results_per_query', 5000)
     if not isinstance(limit, int) or isinstance(limit, bool) or limit < 1:
         raise ValueError('max_results_per_query deve ser um inteiro positivo')
+    records.extend(collect_philpapers(client, config, start, end))
     for category, queries in config['categories'].items():
         print(f'Consultando OpenAlex: {category}', flush=True)
         for term in queries['openalex']:
@@ -297,7 +348,6 @@ def collect(client, config, start, end):
             offset += len(batch)
             if offset >= total:
                 break
-    records.extend(collect_philpapers(client, config, start, end))
     return records
 
 
