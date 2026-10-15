@@ -197,8 +197,14 @@ def discover_philpapers_feed(client, page_url):
     if form_feed:
         return form_feed
     if len(candidates) != 1:
-        raise RuntimeError('Não foi possível identificar um único RSS da categoria PhilPapers. '
-                           'Copie o endereço do RSS da categoria para feed_url em topics.yml.')
+        title = re.search(r'<title[^>]*>(.*?)</title>', response.text, flags=re.I | re.S)
+        title = feed_text(title.group(1))[:120] if title else 'sem título'
+        structure = [(f['attrs'].get('id'), f['attrs'].get('name'),
+                      [c.get('id') for c in f['controls'] if c.get('id')]) for f in parser.forms]
+        raise RuntimeError('Não foi possível identificar o RSS da categoria PhilPapers. '
+                           f'Página: {title}; links RSS: {len(candidates)}; '
+                           f'endpoint presente: {"/utils/feed.pl" in response.text}; formulários: {structure}. '
+                           'Configure feed_url se o site não expuser o formulário esperado.')
     return philpapers_url(candidates.pop())
 
 
