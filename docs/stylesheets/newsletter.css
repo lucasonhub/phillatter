@@ -1,0 +1,9 @@
+:root { --md-text-font-family: system-ui, sans-serif; }
+.md-typeset h1, .md-typeset h2 { font-family: Georgia, serif; font-weight: 600; }
+.md-typeset h1 { color: var(--md-default-fg-color); font-size: 2.6em; }
+.md-typeset .papers { display: grid; gap: 1.2rem; }
+.md-typeset .paper { border: 1px solid var(--md-default-fg-color--lightest); border-left: 4px solid #00897b; border-radius: 8px; padding: 1.1rem; }
+.md-typeset .paper[hidden] { display: none; }
+.md-typeset .paper h3 { margin-top: .4rem; font-family: Georgia, serif; }
+.md-typeset .paper small { color: var(--md-default-fg-color--light); }
+.md-typeset select { font: inherit; padding: .6rem; max-width: 100%; border: 1px solid #00897b; background: var(--md-default-bg-color); color: var(--md-default-fg-color); border-radius: 4px; }

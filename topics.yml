@@ -1,0 +1,23 @@
+max_results_per_query: 5000
+categories:
+  Filosofia da Mente:
+    openalex: ['"philosophy of mind"', '"phenomenal consciousness"', '"hard problem"']
+    arxiv: 'all:"philosophy of mind" OR all:"phenomenal consciousness" OR all:"hard problem of consciousness"'
+  Inteligência Artificial:
+    openalex: ['"artificial intelligence"', '"machine learning"']
+    arxiv: 'cat:cs.AI OR cat:cs.LG'
+  Ciências Cognitivas:
+    openalex: ['"cognitive science"', '"embodied cognition"', '"predictive processing"']
+    arxiv: 'all:"cognitive science" OR all:"embodied cognition" OR all:"predictive processing"'
+  Neurociência:
+    openalex: ['neuroscience', '"neural correlates of consciousness"']
+    arxiv: 'cat:q-bio.NC'
+
+# Descobre o link RSS anunciado na página oficial; feed_url permite fixá-lo.
+philpapers:
+  - category: Filosofia da Mente
+    page_url: https://philpapers.org/browse/philosophy-of-mind
+    feed_url: null
+  - category: Filosofia da Ciência Cognitiva
+    page_url: https://philpapers.org/browse/philosophy-of-cognitive-science
+    feed_url: null

@@ -1,0 +1,75 @@
+name: Atualizar publicações e GitHub Pages
+on:
+  schedule:
+    - cron: '17 9 * * 1' # segunda, 09:17 UTC = 06:17 em Fortaleza
+  workflow_dispatch:
+    inputs:
+      collect:
+        description: Consultar APIs antes de construir o site
+        type: boolean
+        default: true
+  push:
+    branches: [main]
+concurrency:
+  group: newsletter-pages
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    env:
+      SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io/{1}/', github.repository_owner, github.event.repository.name) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.lock.txt
+      - run: pip install -r requirements.lock.txt
+      - name: Validar configuração
+        run: |
+          python -c 'import os; from urllib.parse import urlparse; u=urlparse(os.environ["SITE_URL"]); assert u.scheme == "https" and u.netloc, "Configure vars.SITE_URL com a URL pública HTTPS"'
+      - name: Testes locais
+        run: python -m unittest discover -s tests -v
+      - name: Coletar últimos sete dias completos
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.collect)
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
+        run: python scripts/collect.py
+      - name: Construir site e RSS
+        run: mkdocs build --strict
+      - name: Guardar Markdown e manifests no repositório
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs data
+          if ! git diff --cached --quiet; then
+            git commit -m 'Atualiza edições e publicações'
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  deploy:
+    if: vars.ENABLE_PAGES == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4
