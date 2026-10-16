@@ -115,23 +115,21 @@ tags:
 
 ## Alertas PhilPapers (RSS/Atom)
 
-O coletor usa **feedparser** para cinco fontes do PhilPapers, incluindo duas subcategorias de Miscelânea:
+O coletor usa **feedparser** para quatro fontes do PhilPapers, incluindo duas subcategorias de Miscelânea:
 
 | Categoria no PhilPapers | Categoria no site |
 | --- | --- |
-| Philosophy of Mind | Filosofia da Mente |
 | Philosophy of Artificial Intelligence | Filosofia da Inteligência Artificial |
 | Philosophy of Cognitive Science, Miscellaneous | Filosofia da Ciência Cognitiva, Miscelânea |
 | Philosophy of Consciousness | Filosofia da Consciência |
 | Philosophy of Consciousness, Miscellaneous | Filosofia da Consciência, Miscelânea |
 
-As fontes Teoria da Computação e Computacionalismo foram substituídas pela subcategoria Filosofia da Ciência Cognitiva, Miscelânea. Filosofia da Inteligência Artificial permanece configurada. As buscas de Ciências Cognitivas no OpenAlex e no arXiv continuam configuradas. Os filtros e as tags do site são gerados automaticamente quando houver publicações coletadas nessas categorias. A configuração das páginas não confirma que os feeds estejam acessíveis: a descoberta do RSS no GitHub Actions continua pendente.
+A fonte PhilPapers de Filosofia da Mente foi removida. As buscas de Filosofia da Mente e Ciências Cognitivas no OpenAlex e no arXiv continuam configuradas. As quatro fontes PhilPapers atuais possuem URLs explícitas. Os filtros e as tags do site são gerados automaticamente quando houver publicações coletadas nessas categorias. As quatro URLs dispensam descoberta automática. Os arquivos RSS exportados foram validados; a disponibilidade remota e a execução completa precisam ser verificadas no GitHub Actions.
 
 Em `topics.yml`, cada fonte tem `page_url`, `category` e `feed_url`. Com `feed_url: null`, o script abre a página oficial e procura o formulário `allparams` usado pelo botão RSS que chama `/utils/feed.pl`. Ele lê os campos da própria página e reproduz as alterações `noheader=1`, `__action` e `format` vazio na URL de consulta, sem executar JavaScript. Também aceita um único link RSS/Atom tradicional anunciado na página. Isso evita inventar IDs numéricos de categorias. Se não houver um único link identificável, a coleta falha com uma instrução para copiar o endereço do RSS oferecido pela categoria para `feed_url`. O suporte ao formulário foi testado com HTML simulado baseado no botão RSS observado no site. A confirmação ao vivo continua necessária: a política de rede deste ambiente não permite `philpapers.org`. O parser e a integração foram testados com feeds simulados.
 
 Você pode fixar os endereços reais em `feed_url`, copiados do link de RSS em cada categoria:
 
-- https://philpapers.org/browse/philosophy-of-mind
 - https://philpapers.org/browse/philosophy-of-artificial-intelligence
 - https://philpapers.org/browse/philosophy-of-cognitive-science-miscellaneous/
 - https://philpapers.org/browse/philosophy-of-consciousness
@@ -157,11 +155,15 @@ Esta fonte substitui as duas fontes PhilPapers de Teoria da Computação e Compu
 
 A fonte usa a URL explícita fornecida pelo usuário, com `catId=349`, `cId=349` e `cn=philosophy-of-artificial-intelligence`, preservando os filtros originais. Não depende de descoberta automática para essa categoria. O arquivo RSS anexado foi validado com `feedparser` e com o parser do coletor: 500 registros em RSS 1.0/RDF, sem datas utilizáveis nos itens. Eles entram como descobertas (`date_basis: discovered`), sem afirmar que foram publicados nos sete dias anteriores. A validação do arquivo não confirma a disponibilidade atual da URL remota.
 
+### Feed identificado: Filosofia da Consciência
+
+O feed da categoria geral está configurado com `catId=130`, `cId=130` e `cn=philosophy-of-consciousness`, usando a URL completa fornecida pelo usuário e preservando seus filtros. Ele é distinto do feed de Miscelânea (`131`), que permanece configurado; a deduplicação existente combina as fontes/categorias quando encontra o mesmo registro. O arquivo `philosophy-of-consciousness.rss` foi validado com `feedparser` e com o parser do coletor: 500 entradas RSS 1.0/RDF, sem datas utilizáveis. Seus registros são tratados como descobertas, não como lançamentos comprovados nos últimos sete dias. A validação do arquivo não confirma a disponibilidade atual da URL remota.
+
 ### Feed identificado: Filosofia da Consciência, Miscelânea
 
 Também foi configurada a subcategoria `Philosophy of Consciousness, Miscellaneous`, com `catId=131` e `cId=131`. A URL completa de `/utils/feed.pl` fornecida pelo usuário está em `topics.yml`; ela dispensa descoberta automática apenas para essa fonte. Os filtros originais da URL foram preservados, inclusive `proOnly=on`, `new=1` e `limit=50`. Isso não representa a categoria inteira de Filosofia da Consciência e não determina os IDs das outras categorias.
 
-O arquivo RSS exportado dessa subcategoria foi lido com sucesso pelo parser: 500 entradas, sem datas utilizáveis nos itens. Esses registros são tratados como descobertas, não como publicações comprovadamente lançadas nos últimos sete dias. O valor `limit=50` da URL não garante que a resposta tenha somente 50 itens. O arquivo exportado não equivale a uma confirmação de disponibilidade atual da URL no GitHub Actions. Os dois `feed_url` de Filosofia da Mente e Filosofia da Consciência continuam pendentes; a execução completa ainda pode parar na descoberta dessas fontes.
+O arquivo RSS exportado dessa subcategoria foi lido com sucesso pelo parser: 500 entradas, sem datas utilizáveis nos itens. Esses registros são tratados como descobertas, não como publicações comprovadamente lançadas nos últimos sete dias. O valor `limit=50` da URL não garante que a resposta tenha somente 50 itens. O arquivo exportado não equivale a uma confirmação de disponibilidade atual da URL no GitHub Actions. Não há mais `feed_url` pendentes nas quatro fontes configuradas. Falhas de rede ou respostas inválidas ainda interrompem a execução antes da gravação.
 
 ## Obsidian
 
