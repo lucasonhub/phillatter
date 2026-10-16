@@ -150,6 +150,12 @@ Tratamento dos campos:
 
 RSS é uma lista finita de itens recentes, não uma API histórica paginada: uma coleta semanal pode perder alertas que saiam do feed entre execuções. `--days 30` amplia o filtro temporal, mas não recupera itens que o feed já deixou de fornecer. Para aumentar cobertura, é necessário coletar com maior frequência ou complementar pela API OpenAlex.
 
+### Feed identificado: Filosofia da Consciência, Miscelânea
+
+Além das cinco categorias principais, foi configurada a subcategoria `Philosophy of Consciousness, Miscellaneous`, com `catId=131` e `cId=131`. A URL completa de `/utils/feed.pl` fornecida pelo usuário está em `topics.yml`; ela dispensa descoberta automática apenas para essa fonte. Os filtros originais da URL foram preservados, inclusive `proOnly=on`, `new=1` e `limit=50`. Isso não representa a categoria inteira de Filosofia da Consciência e não determina os IDs das outras categorias.
+
+O arquivo RSS exportado dessa subcategoria foi lido com sucesso pelo parser: 500 entradas, sem datas utilizáveis nos itens. Esses registros são tratados como descobertas, não como publicações comprovadamente lançadas nos últimos sete dias. O valor `limit=50` da URL não garante que a resposta tenha somente 50 itens. O arquivo exportado não equivale a uma confirmação de disponibilidade atual da URL no GitHub Actions. Os outros cinco `feed_url` continuam pendentes; a execução completa ainda pode parar na descoberta dessas fontes.
+
 ## Obsidian
 
 Abra `docs/` como cofre, ou copie essa pasta para um cofre existente. Links entre edições e publicações são Markdown padrão, sem depender de wikilinks. As propriedades YAML são acessíveis no Obsidian; nenhuma extensão é necessária. `tags` preserva os nomes legíveis com espaços e acentos como propriedades YAML; para usar as hashtags nativas do Obsidian, você pode adaptar para slugs sem espaços.

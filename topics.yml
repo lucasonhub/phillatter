@@ -30,3 +30,6 @@ philpapers:
   - category: Filosofia da Consciência
     page_url: https://philpapers.org/browse/philosophy-of-consciousness
     feed_url: null
+  - category: Filosofia da Consciência, Miscelânea
+    page_url: https://philpapers.org/browse/philosophy-of-consciousness-miscellaneous
+    feed_url: 'https://philpapers.org/utils/feed.pl?sqc=&hideAbstracts=&catId=131&filterByAreas=&import_options=1&newWindow=&publishedOnly=&new=1&sort=cat&showCategories=on&categorizerOn=&proOnly=on&cId=131&limit=50&onlineOnly=&freeOnly=&start=0&search_inside=1&cn=philosophy-of-consciousness-miscellaneous&langFilter=&format=&jlist=&noheader=1&__action=https%3A%2F%2Fphilpapers.org%2Fbrowse%2Fphilosophy-of-consciousness-miscellaneous'
