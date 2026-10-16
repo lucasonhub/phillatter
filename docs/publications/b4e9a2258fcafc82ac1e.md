@@ -1,0 +1,70 @@
+---
+title: 'Human–AI collaborative patterns in GenAI-supported instructional design among
+  pre-service teachers: an analysis of interaction sequences and cognitive load'
+authors:
+- Xu Fang
+- Junci Feng
+- Bianyu Yan
+- Binbin Zhou
+date: '2026-10-11'
+type: article
+category: &id001
+- Ciências Cognitivas
+- Inteligência Artificial
+doi: 10.1186/s41239-026-00628-3
+abstract: Abstract The rapid advancement of generative artificial intelligence is
+  profoundly reshaping the paradigm of instructional design. However, the micro-level
+  process patterns of human-AI collaboration in generative AI-enabled instructional
+  design for pre-service teachers still require in-depth analysis. This study aims
+  to uncover the behavioral patterns and cognitive load characteristics of pre-service
+  teachers when collaborating with generative AI to complete instructional design
+  tasks and to explore the patterns of efficient human-AI collaboration. A total of
+  67 pre-service teachers completed instructional design tasks with AI assistance.
+  A systematic instructional plan quality evaluation rubric was developed based on
+  relevant theories, and participants were assigned to the high-quality and low-quality
+  groups using a median split of their lesson-plan quality scores. The study employed
+  lag sequential analysis to compare the behavioral sequence patterns between the
+  two groups and measured their multidimensional cognitive load. The results indicate
+  that the high-quality group exhibited a significant evaluation-revision bidirectional
+  cycle and a revision self-loop, with a clear progressive sequence of “planning →
+  decision-making → generation → evaluation → revision → re-evaluation” in their behavioral
+  flow. In contrast, the low-quality group was mired in ineffective cycles, with fragmented
+  behavioral logic. Key findings showed large effect sizes for the evaluation-revision
+  cycle ( r = 0.606) and for mental demand ( r = 0.647). Regarding cognitive load,
+  the high-quality group reported no greater subjective effort than the low-quality
+  group (though this null finding should be interpreted with caution given the study’s
+  power limitations). A second round of within-sample replication confirmed that these
+  core findings were consistent across a second task. Based on the human-AI collaborative
+  behavioral patterns and cognitive load of the high-quality and low-quality groups,
+  the study constructed a model of the human-AI collaboration patterns in generative
+  AI-enabled instructional design for pre-service teachers. Specifically, higher-quality
+  outputs were associated with a pattern oriented toward cognitive efficiency, characterised
+  by deep processing (evaluation-revision iteration) and by the avoidance of ineffective
+  cycles. Conversely, lower-quality outputs co-occurred with ineffective cycles arising
+  in the context of interaction obstacles, in which repeated clarifications and interrupted
+  revisions were accompanied by higher cognitive and emotional load, describing a
+  pattern of high investment with low output. Because participants were grouped on
+  the basis of their design outcomes, these findings are correlational and do not
+  establish the direction of the relationships; they nonetheless provide empirical
+  evidence to inform the optimisation of human-AI collaboration in GenAI-supported
+  instructional design.
+source:
+- OpenAlex
+source_ids:
+- https://openalex.org/W7221480724
+url: https://doi.org/10.1186/s41239-026-00628-3
+discovered_at: '2026-10-16'
+tags: *id001
+---
+
+# Human–AI collaborative patterns in GenAI\-supported instructional design among pre\-service teachers: an analysis of interaction sequences and cognitive load
+
+**Autores:** Xu Fang; Junci Feng; Bianyu Yan; Binbin Zhou
+
+**Data:** 2026-10-11 · **Tipo:** article
+
+## Resumo
+
+Abstract The rapid advancement of generative artificial intelligence is profoundly reshaping the paradigm of instructional design\. However, the micro\-level process patterns of human\-AI collaboration in generative AI\-enabled instructional design for pre\-service teachers still require in\-depth analysis\. This study aims to uncover the behavioral patterns and cognitive load characteristics of pre\-service teachers when collaborating with generative AI to complete instructional design tasks and to explore the patterns of efficient human\-AI collaboration\. A total of 67 pre\-service teachers completed instructional design tasks with AI assistance\. A systematic instructional plan quality evaluation rubric was developed based on relevant theories, and participants were assigned to the high\-quality and low\-quality groups using a median split of their lesson\-plan quality scores\. The study employed lag sequential analysis to compare the behavioral sequence patterns between the two groups and measured their multidimensional cognitive load\. The results indicate that the high\-quality group exhibited a significant evaluation\-revision bidirectional cycle and a revision self\-loop, with a clear progressive sequence of “planning → decision\-making → generation → evaluation → revision → re\-evaluation” in their behavioral flow\. In contrast, the low\-quality group was mired in ineffective cycles, with fragmented behavioral logic\. Key findings showed large effect sizes for the evaluation\-revision cycle \( r = 0\.606\) and for mental demand \( r = 0\.647\)\. Regarding cognitive load, the high\-quality group reported no greater subjective effort than the low\-quality group \(though this null finding should be interpreted with caution given the study’s power limitations\)\. A second round of within\-sample replication confirmed that these core findings were consistent across a second task\. Based on the human\-AI collaborative behavioral patterns and cognitive load of the high\-quality and low\-quality groups, the study constructed a model of the human\-AI collaboration patterns in generative AI\-enabled instructional design for pre\-service teachers\. Specifically, higher\-quality outputs were associated with a pattern oriented toward cognitive efficiency, characterised by deep processing \(evaluation\-revision iteration\) and by the avoidance of ineffective cycles\. Conversely, lower\-quality outputs co\-occurred with ineffective cycles arising in the context of interaction obstacles, in which repeated clarifications and interrupted revisions were accompanied by higher cognitive and emotional load, describing a pattern of high investment with low output\. Because participants were grouped on the basis of their design outcomes, these findings are correlational and do not establish the direction of the relationships; they nonetheless provide empirical evidence to inform the optimisation of human\-AI collaboration in GenAI\-supported instructional design\.
+
+[Consultar publicação](<https://doi.org/10.1186/s41239-026-00628-3>)

@@ -1,0 +1,51 @@
+---
+title: 'Stock market prediction with machine learning and deep learning models: task
+  design, model alignment, and theory integration'
+authors:
+- Mr Nihar Ranjan Prusty
+- P. V. Thayyib
+date: '2026-10-12'
+type: article
+category: &id001
+- Inteligência Artificial
+doi: 10.6084/m9.figshare.34363041
+abstract: 'Recent advances in machine learning (ML), deep learning (DL), and hybrid
+  models have accelerated research on stock market prediction. However, existing reviews
+  largely compare algorithms while giving limited attention to alignment among prediction
+  tasks, data, models, evaluation, and financial theory. This study systematically
+  reviews 107 Q1 journal articles (2022–2025) from a task-oriented design perspective.
+  Following a transparent review protocol and structured coding framework, the studies
+  were analysed across six dimensions: prediction task, model family, data modality,
+  multimodal fusion strategy, evaluation practice, and financial theory integration.
+  Four major patterns emerge. Daily price/return regression dominates, whereas trend
+  classification, intraday forecasting, and cross-frequency prediction remain underexplored.
+  DL has become the dominant modelling paradigm, but model selection often reflects
+  established practice rather than systematic task-model alignment. Multimodal learning
+  is increasingly adopted, although fusion strategies are rarely justified by prediction
+  objectives. Financial theory mainly supports feature engineering, with limited integration
+  into learning objectives, model constraints, or evaluation. Evaluation practices
+  remain heterogeneous and emphasize statistical over economic performance measures.
+  By reframing stock market prediction as a design problem, this review provides a
+  structured framework linking prediction tasks, models, data, evaluation, and financial
+  theory. The findings guide researchers and practitioners toward more interpretable,
+  reproducible, and financially grounded forecasting models.'
+source:
+- OpenAlex
+source_ids:
+- https://openalex.org/W7221565811
+url: https://doi.org/10.6084/m9.figshare.34363041
+discovered_at: '2026-10-16'
+tags: *id001
+---
+
+# Stock market prediction with machine learning and deep learning models: task design, model alignment, and theory integration
+
+**Autores:** Mr Nihar Ranjan Prusty; P\. V\. Thayyib
+
+**Data:** 2026-10-12 · **Tipo:** article
+
+## Resumo
+
+Recent advances in machine learning \(ML\), deep learning \(DL\), and hybrid models have accelerated research on stock market prediction\. However, existing reviews largely compare algorithms while giving limited attention to alignment among prediction tasks, data, models, evaluation, and financial theory\. This study systematically reviews 107 Q1 journal articles \(2022–2025\) from a task\-oriented design perspective\. Following a transparent review protocol and structured coding framework, the studies were analysed across six dimensions: prediction task, model family, data modality, multimodal fusion strategy, evaluation practice, and financial theory integration\. Four major patterns emerge\. Daily price/return regression dominates, whereas trend classification, intraday forecasting, and cross\-frequency prediction remain underexplored\. DL has become the dominant modelling paradigm, but model selection often reflects established practice rather than systematic task\-model alignment\. Multimodal learning is increasingly adopted, although fusion strategies are rarely justified by prediction objectives\. Financial theory mainly supports feature engineering, with limited integration into learning objectives, model constraints, or evaluation\. Evaluation practices remain heterogeneous and emphasize statistical over economic performance measures\. By reframing stock market prediction as a design problem, this review provides a structured framework linking prediction tasks, models, data, evaluation, and financial theory\. The findings guide researchers and practitioners toward more interpretable, reproducible, and financially grounded forecasting models\.
+
+[Consultar publicação](<https://doi.org/10.6084/m9.figshare.34363041>)

@@ -1,0 +1,51 @@
+---
+title: Multi-Horizon Explainable Queue Forecasting and Resource-Aware Decision Support
+  for Intelligent Border Control Using LightGBM
+authors:
+- Varvara Mama
+- Fani D. Christidi
+- Nikolaos C. Kapsalis
+- Anargyros T. Baklezos
+- Christos D. Nikolopoulos
+date: '2026-10-11'
+type: preprint
+category: &id001
+- Inteligência Artificial
+doi: null
+abstract: Border crossing points are stochastic service systems in which traffic demand,
+  traveler categories, registration status, inspection requirements, staffing, and
+  lane availability interact on multiple time scales. This paper extends an earlier
+  multimodal queue-management framework by introducing an implementation-oriented,
+  multi-horizon forecasting and decision-support architecture based on Light Gradient
+  Boosting Machine (LightGBM) models. In contrast to a single forecasting block, the
+  proposed approach constructs horizon-specific regressors for 15, 30, 60, and 120
+  min forecasts and jointly estimates future waiting time and queue lengths. The models
+  operate on temporally lagged traffic, service, density, and queue features, while
+  an operational layer incorporates lane compatibility, officer availability, possibly
+  degraded resources, traveler category, preregistration information, and human-approval
+  constraints. Quantile LightGBM models provide 95\% prediction intervals for waiting-time
+  forecasts. Beyond prediction, the framework produces machine-readable recommendations,
+  alerts, aggregate key performance indicators, confidence information, and integration
+  outputs suitable for border resource-management and decision-support systems. The
+  results establish a reproducible synthetic-data baseline and a practical interface
+  for subsequent validation with operational border-crossing data.
+source:
+- arXiv
+source_ids:
+- arxiv:2610.15930
+url: https://arxiv.org/abs/2610.15930
+discovered_at: '2026-10-16'
+tags: *id001
+---
+
+# Multi\-Horizon Explainable Queue Forecasting and Resource\-Aware Decision Support for Intelligent Border Control Using LightGBM
+
+**Autores:** Varvara Mama; Fani D\. Christidi; Nikolaos C\. Kapsalis; Anargyros T\. Baklezos; Christos D\. Nikolopoulos
+
+**Data:** 2026-10-11 · **Tipo:** preprint
+
+## Resumo
+
+Border crossing points are stochastic service systems in which traffic demand, traveler categories, registration status, inspection requirements, staffing, and lane availability interact on multiple time scales\. This paper extends an earlier multimodal queue\-management framework by introducing an implementation\-oriented, multi\-horizon forecasting and decision\-support architecture based on Light Gradient Boosting Machine \(LightGBM\) models\. In contrast to a single forecasting block, the proposed approach constructs horizon\-specific regressors for 15, 30, 60, and 120 min forecasts and jointly estimates future waiting time and queue lengths\. The models operate on temporally lagged traffic, service, density, and queue features, while an operational layer incorporates lane compatibility, officer availability, possibly degraded resources, traveler category, preregistration information, and human\-approval constraints\. Quantile LightGBM models provide 95\\% prediction intervals for waiting\-time forecasts\. Beyond prediction, the framework produces machine\-readable recommendations, alerts, aggregate key performance indicators, confidence information, and integration outputs suitable for border resource\-management and decision\-support systems\. The results establish a reproducible synthetic\-data baseline and a practical interface for subsequent validation with operational border\-crossing data\.
+
+[Consultar publicação](<https://arxiv.org/abs/2610.15930>)

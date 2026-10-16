@@ -1,0 +1,51 @@
+---
+title: 'Getting Space Right: Agentic Rewards for Image Generation'
+authors:
+- Xiaofeng Tan
+- Jiaxin Lin
+- Haobo Yuan
+- Tiancheng Shen
+- Zihan Su
+- Rui Chen
+- Hongsong Wang
+- Ming-Hsuan Yang
+date: '2026-10-10'
+type: preprint
+category: &id001
+- Inteligência Artificial
+doi: null
+abstract: 'Reinforcement learning (RL) is promising for spatial text-to-image generation,
+  but existing work largely focuses on policy optimization, assuming accurate rewards
+  and effective online rollouts. We observe in-domain gains with out-of-domain degradation,
+  exposing two limitations: unreliable spatial rewards in open-world settings and
+  rollouts lacking basic-to-complex progression. We propose a curriculum-guided RL
+  framework. First, we introduce SpatialCritic, an agentic reward model equipped with
+  a spatial perception harness that combines reusable verification guidance with specialized
+  vision tools. We then construct spatial preference datasets through targeted counterfactual
+  perturbations and perform agent-harness alignment to improve tool selection and
+  evidence integration efficiently. Second, curriculum learning organizes shared foundational
+  capabilities and their compositional dependencies in a capability graph for mastery-guided
+  rollouts, periodic review, and targeted remediation. On SpaRW-Eval, SpatialCritic
+  achieves 95.1% verification accuracy, outperforming 320B GLM-5.3-Flash with a 40x
+  smaller 8B backbone and raising average baseline scores from 78.4 to 83.9 on SD3.5-Medium
+  and 83.2 to 86.5 on BAGEL. Project page: https://xiaofeng-tan.github.io/projects/spatialcritic/'
+source:
+- arXiv
+source_ids:
+- arxiv:2610.14852
+url: https://arxiv.org/abs/2610.14852
+discovered_at: '2026-10-16'
+tags: *id001
+---
+
+# Getting Space Right: Agentic Rewards for Image Generation
+
+**Autores:** Xiaofeng Tan; Jiaxin Lin; Haobo Yuan; Tiancheng Shen; Zihan Su; Rui Chen; Hongsong Wang; Ming\-Hsuan Yang
+
+**Data:** 2026-10-10 · **Tipo:** preprint
+
+## Resumo
+
+Reinforcement learning \(RL\) is promising for spatial text\-to\-image generation, but existing work largely focuses on policy optimization, assuming accurate rewards and effective online rollouts\. We observe in\-domain gains with out\-of\-domain degradation, exposing two limitations: unreliable spatial rewards in open\-world settings and rollouts lacking basic\-to\-complex progression\. We propose a curriculum\-guided RL framework\. First, we introduce SpatialCritic, an agentic reward model equipped with a spatial perception harness that combines reusable verification guidance with specialized vision tools\. We then construct spatial preference datasets through targeted counterfactual perturbations and perform agent\-harness alignment to improve tool selection and evidence integration efficiently\. Second, curriculum learning organizes shared foundational capabilities and their compositional dependencies in a capability graph for mastery\-guided rollouts, periodic review, and targeted remediation\. On SpaRW\-Eval, SpatialCritic achieves 95\.1% verification accuracy, outperforming 320B GLM\-5\.3\-Flash with a 40x smaller 8B backbone and raising average baseline scores from 78\.4 to 83\.9 on SD3\.5\-Medium and 83\.2 to 86\.5 on BAGEL\. Project page: https://xiaofeng\-tan\.github\.io/projects/spatialcritic/
+
+[Consultar publicação](<https://arxiv.org/abs/2610.14852>)

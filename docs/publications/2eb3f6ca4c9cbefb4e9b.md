@@ -1,0 +1,51 @@
+---
+title: 'NetRL: Powering Network Decisions via NetGRPO-Driven Reinforcement Learning'
+authors:
+- Lingfeng Peng
+- Xiaohui Xie
+- Yang Bao
+- Yong Cui
+date: '2026-10-12'
+type: preprint
+category: &id001
+- Inteligência Artificial
+doi: null
+abstract: Network decision-making tasks, including adaptive bitrate streaming, load
+  balancing, and congestion control, require policies to process heterogeneous states
+  and actions while balancing near- and long-term consequences. Existing solutions
+  generalize poorly across network tasks, require substantial task-specific redesign,
+  and lack reliable evaluation of long- horizon action consequences. Methods that
+  learn through online interaction additionally face unstable optimization. We present
+  NetRL, a two-stage LLM-based reinforcement learning framework that combines supervised
+  fine-tuning on demonstration trajectories with online policy optimization. A universal
+  mixed-embedding interface combines textual task descriptions with precise numerical
+  states, while a network action head produces valid decisions. At its core, NetGRPO
+  evaluates candidate actions over multiple future trajectories, directs deeper search
+  toward uncertain alternatives through confidence-aware budgeting, and performs group-relative,
+  clipped, and KL-regularized updates. NetRL achieves 23.6% higher QoE than NetLLM,
+  12.2% lower job completion time than Genet, and 24.1% higher network utility than
+  Orca, yielding state-of-the-art performance among the evaluated methods. Confidence-aware
+  budgeting reduces end-to-end training time by 27.1% without reducing validation
+  QoE. NetRL also converges stably and generalizes to unseen network traces without
+  retraining. Code and model weights are available at the repository linked in this
+  paper.
+source:
+- arXiv
+source_ids:
+- arxiv:2610.16226
+url: https://arxiv.org/abs/2610.16226
+discovered_at: '2026-10-16'
+tags: *id001
+---
+
+# NetRL: Powering Network Decisions via NetGRPO\-Driven Reinforcement Learning
+
+**Autores:** Lingfeng Peng; Xiaohui Xie; Yang Bao; Yong Cui
+
+**Data:** 2026-10-12 · **Tipo:** preprint
+
+## Resumo
+
+Network decision\-making tasks, including adaptive bitrate streaming, load balancing, and congestion control, require policies to process heterogeneous states and actions while balancing near\- and long\-term consequences\. Existing solutions generalize poorly across network tasks, require substantial task\-specific redesign, and lack reliable evaluation of long\- horizon action consequences\. Methods that learn through online interaction additionally face unstable optimization\. We present NetRL, a two\-stage LLM\-based reinforcement learning framework that combines supervised fine\-tuning on demonstration trajectories with online policy optimization\. A universal mixed\-embedding interface combines textual task descriptions with precise numerical states, while a network action head produces valid decisions\. At its core, NetGRPO evaluates candidate actions over multiple future trajectories, directs deeper search toward uncertain alternatives through confidence\-aware budgeting, and performs group\-relative, clipped, and KL\-regularized updates\. NetRL achieves 23\.6% higher QoE than NetLLM, 12\.2% lower job completion time than Genet, and 24\.1% higher network utility than Orca, yielding state\-of\-the\-art performance among the evaluated methods\. Confidence\-aware budgeting reduces end\-to\-end training time by 27\.1% without reducing validation QoE\. NetRL also converges stably and generalizes to unseen network traces without retraining\. Code and model weights are available at the repository linked in this paper\.
+
+[Consultar publicação](<https://arxiv.org/abs/2610.16226>)

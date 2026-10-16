@@ -1,0 +1,54 @@
+---
+title: Does a Hosted Decision Model Respect Irrelevant Alternatives? A Pre-Registered
+  Test of Option-Set Dependence in Jev
+authors:
+- Dushyant Rajput
+- Nirdesh Chauhan
+- Siddharth Kosaraju
+date: '2026-10-12'
+type: preprint
+category: &id001
+- Inteligência Artificial
+doi: null
+abstract: 'Decision APIs that return a probability for each option are routinely used
+  as if those probabilities were properties of the options themselves. That reading
+  is valid only if the model satisfies independence of irrelevant alternatives (IIA):
+  adding an option that is neither the right answer nor its strongest rival should
+  leave the odds between those two unchanged. We test this in a pre-registered study
+  of jev-1.13.0, a hosted decision model, using 299,463 calls on intent classification
+  (BANKING77, CLINC150) and topic classification (AG News). Every added option moves
+  the log-odds between the gold label and the strongest wrong label: the root-mean-square
+  systematic shift is 0.20-0.52 nats, 1.2 to 3 times the run-to-run variation, even
+  when the added option takes at most 0.1% of the probability mass. The shifts are
+  directional. An option similar to the wrong answer draws probability from it (+0.10
+  nats toward the gold label). A paraphrase of the wrong answer produces an intermediate
+  pattern: the gold label''s probability is almost conserved, but the paraphrase receives
+  only about a third of the wrong answer''s share rather than the half that strict
+  substitution implies. The distortion grows steadily with the logarithm of the number
+  of options, reaching about 1 nat at 255 options, and off-domain padding pushes the
+  odds against the gold label. In contrast, questions packed into one call do not
+  interact (bias < 0.001). Scoring each option with an independent yes/no question
+  removes the option-set dependence but picks the right answer 8.7 points less often.
+  Jev sits between two local baselines, an option-independent scorer and a prompt
+  readout. Its probabilities are best read as relative to the option list they were
+  computed over.'
+source:
+- arXiv
+source_ids:
+- arxiv:2610.16655
+url: https://arxiv.org/abs/2610.16655
+discovered_at: '2026-10-16'
+tags: *id001
+---
+
+# Does a Hosted Decision Model Respect Irrelevant Alternatives? A Pre\-Registered Test of Option\-Set Dependence in Jev
+
+**Autores:** Dushyant Rajput; Nirdesh Chauhan; Siddharth Kosaraju
+
+**Data:** 2026-10-12 · **Tipo:** preprint
+
+## Resumo
+
+Decision APIs that return a probability for each option are routinely used as if those probabilities were properties of the options themselves\. That reading is valid only if the model satisfies independence of irrelevant alternatives \(IIA\): adding an option that is neither the right answer nor its strongest rival should leave the odds between those two unchanged\. We test this in a pre\-registered study of jev\-1\.13\.0, a hosted decision model, using 299,463 calls on intent classification \(BANKING77, CLINC150\) and topic classification \(AG News\)\. Every added option moves the log\-odds between the gold label and the strongest wrong label: the root\-mean\-square systematic shift is 0\.20\-0\.52 nats, 1\.2 to 3 times the run\-to\-run variation, even when the added option takes at most 0\.1% of the probability mass\. The shifts are directional\. An option similar to the wrong answer draws probability from it \(\+0\.10 nats toward the gold label\)\. A paraphrase of the wrong answer produces an intermediate pattern: the gold label&\#x27;s probability is almost conserved, but the paraphrase receives only about a third of the wrong answer&\#x27;s share rather than the half that strict substitution implies\. The distortion grows steadily with the logarithm of the number of options, reaching about 1 nat at 255 options, and off\-domain padding pushes the odds against the gold label\. In contrast, questions packed into one call do not interact \(bias &lt; 0\.001\)\. Scoring each option with an independent yes/no question removes the option\-set dependence but picks the right answer 8\.7 points less often\. Jev sits between two local baselines, an option\-independent scorer and a prompt readout\. Its probabilities are best read as relative to the option list they were computed over\.
+
+[Consultar publicação](<https://arxiv.org/abs/2610.16655>)

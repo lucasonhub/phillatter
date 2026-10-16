@@ -1,0 +1,54 @@
+---
+title: Exploring Interpretability in Deep Learning-Based Forest Classification - Separating
+  Similar Forest Classes using Sentinel-2 Time Series
+authors:
+- Maximilian Kirsch
+- Christine Preisach
+date: '2026-10-13'
+type: preprint
+category: &id001
+- Inteligência Artificial
+doi: null
+abstract: The ecological insurance theory posits that diverse forests are more resilient
+  and better able to adapt to changing environmental conditions. Increasing drought
+  and heat stress in Central Europe promotes mixed forests for maintaining ecosystem
+  services. However, a diverse species distribution complicates remote sensing-based
+  species mapping, as distinguishing pure from mixed species compositions at the pixel
+  level remains challenging. We evaluated the potential of recurrent neural networks
+  (RNNs) for tree-species classification from Sentinel-2 time series and investigated
+  the spectral-temporal features underlying class discrimination, with particular
+  emphasis on separating pure from mixed Norway spruce pixels. We compared RNN classification
+  models with Random Forest (RF) and Extreme Gradient Boosting (XGBoost) and used
+  Integrated Gradients (IG) to quantify feature attributions across spectral bands
+  and time. The best-performing RNN achieved a Macro-F1 score of 0.851 on the test
+  data, outperforming XGBoost by 0.012 and Random Forest by 0.103. Beyond classification
+  performance, the attribution analysis revealed distinct spectral-temporal patterns
+  associated with the separation of pure and mixed Norway spruce pixels. Attribution
+  values increased particularly after approximately day of year (DOY) 125, while B11
+  showed the strongest contribution during periods of increasing spectral divergence
+  between the two classes. These findings show that recurrent models can provide competitive
+  classification performance while also revealing the phenological periods and spectral
+  regions that are most relevant for distinguishing closely related forest compositions.
+  Combining time-series classification with explainability therefore provides additional
+  insight into the spectral-temporal mechanisms underlying tree-species discrimination
+  and may support more detailed mapping of mixed forest structures.
+source:
+- arXiv
+source_ids:
+- arxiv:2610.19270
+url: https://arxiv.org/abs/2610.19270
+discovered_at: '2026-10-16'
+tags: *id001
+---
+
+# Exploring Interpretability in Deep Learning\-Based Forest Classification \- Separating Similar Forest Classes using Sentinel\-2 Time Series
+
+**Autores:** Maximilian Kirsch; Christine Preisach
+
+**Data:** 2026-10-13 · **Tipo:** preprint
+
+## Resumo
+
+The ecological insurance theory posits that diverse forests are more resilient and better able to adapt to changing environmental conditions\. Increasing drought and heat stress in Central Europe promotes mixed forests for maintaining ecosystem services\. However, a diverse species distribution complicates remote sensing\-based species mapping, as distinguishing pure from mixed species compositions at the pixel level remains challenging\. We evaluated the potential of recurrent neural networks \(RNNs\) for tree\-species classification from Sentinel\-2 time series and investigated the spectral\-temporal features underlying class discrimination, with particular emphasis on separating pure from mixed Norway spruce pixels\. We compared RNN classification models with Random Forest \(RF\) and Extreme Gradient Boosting \(XGBoost\) and used Integrated Gradients \(IG\) to quantify feature attributions across spectral bands and time\. The best\-performing RNN achieved a Macro\-F1 score of 0\.851 on the test data, outperforming XGBoost by 0\.012 and Random Forest by 0\.103\. Beyond classification performance, the attribution analysis revealed distinct spectral\-temporal patterns associated with the separation of pure and mixed Norway spruce pixels\. Attribution values increased particularly after approximately day of year \(DOY\) 125, while B11 showed the strongest contribution during periods of increasing spectral divergence between the two classes\. These findings show that recurrent models can provide competitive classification performance while also revealing the phenological periods and spectral regions that are most relevant for distinguishing closely related forest compositions\. Combining time\-series classification with explainability therefore provides additional insight into the spectral\-temporal mechanisms underlying tree\-species discrimination and may support more detailed mapping of mixed forest structures\.
+
+[Consultar publicação](<https://arxiv.org/abs/2610.19270>)
