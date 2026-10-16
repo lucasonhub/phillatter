@@ -21,12 +21,9 @@ philpapers:
   - category: Filosofia da Inteligência Artificial
     page_url: https://philpapers.org/browse/philosophy-of-artificial-intelligence
     feed_url: 'https://philpapers.org/utils/feed.pl?start=0&langFilter=&filterByAreas=&proOnly=on&publishedOnly=&cn=philosophy-of-artificial-intelligence&new=1&categorizerOn=&showCategories=on&sort=cat&catId=349&newWindow=&hideAbstracts=&freeOnly=&sqc=&onlineOnly=&search_inside=1&import_options=1&cId=349&limit=50&format=&jlist=&noheader=1&__action=https%3A%2F%2Fphilpapers.org%2Fbrowse%2Fphilosophy-of-artificial-intelligence'
-  - category: Teoria da Computação
-    page_url: https://philpapers.org/browse/theory-of-computation
-    feed_url: null
-  - category: Computacionalismo
-    page_url: https://philpapers.org/browse/computationalism
-    feed_url: null
+  - category: Filosofia da Ciência Cognitiva, Miscelânea
+    page_url: https://philpapers.org/browse/philosophy-of-cognitive-science-miscellaneous/
+    feed_url: 'https://philpapers.org/utils/feed.pl?hideAbstracts=&start=0&onlineOnly=&import_options=1&catId=387&langFilter=&publishedOnly=&cn=philosophy-of-cognitive-science-miscellaneous&categorizerOn=&proOnly=on&sort=cat&sqc=&filterByAreas=&limit=50&new=1&freeOnly=&cId=387&search_inside=1&showCategories=on&newWindow=&format=&jlist=&noheader=1&__action=https%3A%2F%2Fphilpapers.org%2Fbrowse%2Fphilosophy-of-cognitive-science-miscellaneous%2F'
   - category: Filosofia da Consciência
     page_url: https://philpapers.org/browse/philosophy-of-consciousness
     feed_url: null
