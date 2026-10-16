@@ -102,6 +102,7 @@ class FeedHTML(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.text = []
         self.feeds = set()
+        self.links = []
         self.hidden = 0
         self.forms = []
         self.current_form = None
@@ -116,6 +117,8 @@ class FeedHTML(HTMLParser):
         if tag in ('script', 'style'):
             self.hidden += 1
         href = attrs.get('href', '')
+        if tag == 'a' and href:
+            self.links.append(href)
         if tag in ('link', 'a') and href:
             mime = attrs.get('type', '').split(';')[0].lower()
             if mime in ('application/rss+xml', 'application/atom+xml') or re.search(r'(?:/rss(?:[/.?]|$)|rss\.pl|[?&]format=rss(?:&|$))', href, re.I):
@@ -215,7 +218,12 @@ def philpapers_records(content, category, start, end, observed_on=None):
         if re.search(r'<(?:!doctype\s+html|html)(?:\s|>)', preview, flags=re.I):
             title = re.search(r'<title[^>]*>(.*?)</title>', preview, flags=re.I | re.S)
             label = feed_text(title.group(1))[:120] if title else 'sem título'
+            page = FeedHTML()
+            page.feed(content.decode('utf-8', errors='replace') if isinstance(content, bytes) else content)
+            excerpt = ' '.join(''.join(page.text).split())[-2400:]
+            feed_links = [link for link in page.links if re.search(r'feed|rss', link, re.I)]
             raise RuntimeError(f'PhilPapers retornou uma página HTML em vez de RSS/Atom: {label}. '
+                               f'Mensagem da página: {excerpt}; links de feed: {feed_links}. '
                                'Nenhuma edição foi gravada.')
         problem = type(feed.get('bozo_exception')).__name__ if feed.bozo else 'formato não reconhecido'
         raise RuntimeError(f'PhilPapers retornou RSS/Atom inválido: {problem}; '
