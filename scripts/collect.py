@@ -211,7 +211,16 @@ def discover_philpapers_feed(client, page_url):
 def philpapers_records(content, category, start, end, observed_on=None):
     feed = feedparser.parse(content)
     if feed.bozo or not feed.version:
-        raise RuntimeError('PhilPapers retornou um feed RSS/Atom inválido')
+        preview = content[:16384].decode('utf-8', errors='replace') if isinstance(content, bytes) else content[:16384]
+        if re.search(r'<(?:!doctype\s+html|html)(?:\s|>)', preview, flags=re.I):
+            title = re.search(r'<title[^>]*>(.*?)</title>', preview, flags=re.I | re.S)
+            label = feed_text(title.group(1))[:120] if title else 'sem título'
+            raise RuntimeError(f'PhilPapers retornou uma página HTML em vez de RSS/Atom: {label}. '
+                               'Nenhuma edição foi gravada.')
+        problem = type(feed.get('bozo_exception')).__name__ if feed.bozo else 'formato não reconhecido'
+        raise RuntimeError(f'PhilPapers retornou RSS/Atom inválido: {problem}; '
+                           f'versão={feed.version or "ausente"}; itens={len(feed.entries)}. '
+                           'Nenhuma edição foi gravada.')
     observed_on = observed_on or datetime.now(timezone.utc).date()
     records = []
     for entry in feed.entries:
@@ -259,6 +268,10 @@ def collect_philpapers(client, config, start, end):
         print(f"Consultando PhilPapers: {settings['category']}", flush=True)
         url = settings.get('feed_url') or discover_philpapers_feed(client, settings['page_url'])
         response = client.get(philpapers_url(url), {})
+        headers = getattr(response, 'headers', {})
+        print(f"PhilPapers: HTTP {getattr(response, 'status_code', '?')}; "
+              f"Content-Type={headers.get('Content-Type', 'não informado')}; "
+              f"bytes={len(response.content)}", flush=True)
         records.extend(philpapers_records(response.content, settings['category'], start, end))
     return records
 

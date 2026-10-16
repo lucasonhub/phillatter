@@ -51,6 +51,11 @@ class PhilPapersTest(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 philpapers_records(content, 'Mente', START, END)
 
+    def test_html_response_is_identified(self):
+        body = b'<!DOCTYPE html><html><head><title>Feed unavailable</title></head><body>Not a feed</body></html>'
+        with self.assertRaisesRegex(RuntimeError, 'HTML em vez de RSS/Atom: Feed unavailable'):
+            philpapers_records(body, 'Mente', START, END)
+
     def test_discovery_and_explicit_url(self):
         class Client:
             calls = []
