@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 import re
 import time
-from urllib.parse import quote, urlparse, urljoin, urlencode
+from urllib.parse import quote, urlparse, urljoin, urlencode, parse_qs
 import xml.etree.ElementTree as ET
 
 import feedparser
@@ -218,12 +218,7 @@ def philpapers_records(content, category, start, end, observed_on=None):
         if re.search(r'<(?:!doctype\s+html|html)(?:\s|>)', preview, flags=re.I):
             title = re.search(r'<title[^>]*>(.*?)</title>', preview, flags=re.I | re.S)
             label = feed_text(title.group(1))[:120] if title else 'sem título'
-            page = FeedHTML()
-            page.feed(content.decode('utf-8', errors='replace') if isinstance(content, bytes) else content)
-            excerpt = ' '.join(''.join(page.text).split())[-2400:]
-            feed_links = [link for link in page.links if re.search(r'feed|rss', link, re.I)]
             raise RuntimeError(f'PhilPapers retornou uma página HTML em vez de RSS/Atom: {label}. '
-                               f'Mensagem da página: {excerpt}; links de feed: {feed_links}. '
                                'Nenhuma edição foi gravada.')
         problem = type(feed.get('bozo_exception')).__name__ if feed.bozo else 'formato não reconhecido'
         raise RuntimeError(f'PhilPapers retornou RSS/Atom inválido: {problem}; '
@@ -270,12 +265,41 @@ def philpapers_records(content, category, start, end, observed_on=None):
     return records
 
 
+def download_philpapers_feed(client, url):
+    """Segue uma única página intermediária oficial, preservando a categoria."""
+    url = philpapers_url(url)
+    response = client.get(url, {})
+    body = response.content
+    if not re.search(br'<(?:!doctype\s+html|html)(?:\s|>)', body[:16384], flags=re.I):
+        return response
+    page = FeedHTML()
+    page.feed(body.decode('utf-8', errors='replace'))
+    expected = parse_qs(urlparse(url).query)
+    candidates = set()
+    for href in page.links:
+        candidate = urljoin(url, href)
+        parsed = urlparse(candidate)
+        params = parse_qs(parsed.query)
+        if parsed.scheme != 'https' or parsed.hostname not in ('philpapers.org', 'www.philpapers.org'):
+            continue
+        if params.get('format') != ['rss']:
+            continue
+        if any(expected.get(key) != params.get(key) for key in ('catId', 'cId', 'cn') if key in expected):
+            continue
+        candidates.add(candidate)
+    if len(candidates) == 1:
+        print('PhilPapers: seguindo o link RSS da página intermediária oficial.', flush=True)
+        return client.get(candidates.pop(), {})
+    # O parser produz o diagnóstico de HTML; não aceitar outra categoria ou domínio.
+    return response
+
+
 def collect_philpapers(client, config, start, end):
     records = []
     for settings in config.get('philpapers', []):
         print(f"Consultando PhilPapers: {settings['category']}", flush=True)
         url = settings.get('feed_url') or discover_philpapers_feed(client, settings['page_url'])
-        response = client.get(philpapers_url(url), {})
+        response = download_philpapers_feed(client, url)
         headers = getattr(response, 'headers', {})
         print(f"PhilPapers: HTTP {getattr(response, 'status_code', '?')}; "
               f"Content-Type={headers.get('Content-Type', 'não informado')}; "

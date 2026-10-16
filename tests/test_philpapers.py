@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from collect import (collect, collect_philpapers, discover_philpapers_feed,
-                     philpapers_records, read_note, save_records)
+                     philpapers_records, read_note, save_records, download_philpapers_feed)
 
 START, END = date(2026, 10, 8), date(2026, 10, 15)
 
@@ -116,6 +116,40 @@ class PhilPapersTest(unittest.TestCase):
                 return type('R', (), {'text': '<form id="allparams"></form><span>/utils/feed.pl</span>'})()
         with self.assertRaises(RuntimeError):
             discover_philpapers_feed(Client(), 'https://philpapers.org/browse/philosophy-of-mind')
+
+    def test_follows_official_intermediate_page_to_rss(self):
+        url = 'https://philpapers.org/utils/feed.pl?catId=349&cId=349&cn=philosophy-of-artificial-intelligence'
+        target = '/browse/philosophy-of-artificial-intelligence?cId=349&amp;catId=349&amp;cn=philosophy-of-artificial-intelligence&amp;dg=generated&amp;format=rss'
+        html = f'<html><title>RSS Feed - PhilPapers</title><p>Here is the link to the feed you requested:</p><a href="{target}">RSS</a></html>'.encode()
+        class Client:
+            def __init__(self):
+                self.calls = []
+            def get(self, address, params):
+                self.calls.append(address)
+                body = html if len(self.calls) == 1 else feed(item())
+                return type('R', (), {'content': body})()
+        client = Client()
+        response = download_philpapers_feed(client, url)
+        self.assertEqual(len(client.calls), 2)
+        self.assertTrue(client.calls[1].startswith('https://philpapers.org/browse/'))
+        self.assertIn('dg=generated', client.calls[1])
+        self.assertIn('&format=rss', client.calls[1])
+        self.assertEqual(len(philpapers_records(response.content, 'IA', START, END)), 1)
+
+    def test_intermediate_link_must_keep_domain_and_category(self):
+        for target in ('https://other.example/feed?catId=349&format=rss',
+                       'https://philpapers.org/browse/other?catId=131&format=rss'):
+            class Client:
+                def __init__(self):
+                    self.calls = []
+                def get(self, address, params):
+                    self.calls.append(address)
+                    return type('R', (), {'content': f'<html><a href="{target}">RSS</a></html>'.encode()})()
+            client = Client()
+            response = download_philpapers_feed(client, 'https://philpapers.org/utils/feed.pl?catId=349')
+            self.assertEqual(len(client.calls), 1)
+            with self.assertRaisesRegex(RuntimeError, 'HTML em vez de RSS/Atom'):
+                philpapers_records(response.content, 'IA', START, END)
 
     def test_collection_integration_and_dedup(self):
         class Client:

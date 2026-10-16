@@ -147,6 +147,10 @@ Tratamento dos campos:
 
 RSS é uma lista finita de itens recentes, não uma API histórica paginada: uma coleta semanal pode perder alertas que saiam do feed entre execuções. `--days 30` amplia o filtro temporal, mas não recupera itens que o feed já deixou de fornecer. Para aumentar cobertura, é necessário coletar com maior frequência ou complementar pela API OpenAlex.
 
+### Página intermediária do RSS
+
+O endpoint `/utils/feed.pl` pode retornar HTTP 200 com HTML intitulado `RSS Feed - PhilPapers`, contendo o link efetivo do XML. O coletor identifica essa página e segue uma única URL HTTPS do PhilPapers com `format=rss`, conferindo os parâmetros `catId`, `cId` e `cn` da fonte. Os parâmetros gerados pelo servidor são preservados e obtidos novamente a cada execução. Não é necessário copiar o link temporário para `topics.yml`. Se o destino ainda for HTML ou RSS inválido, a coleta falha sem gravar uma edição parcial.
+
 ### Feed identificado: Filosofia da Ciência Cognitiva, Miscelânea
 
 Esta fonte substitui as duas fontes PhilPapers de Teoria da Computação e Computacionalismo. A URL explícita fornecida pelo usuário preserva `catId=387`, `cId=387`, `cn=philosophy-of-cognitive-science-miscellaneous` e os demais parâmetros, incluindo a barra final da página em `__action`. Trata-se da subcategoria de Miscelânea, não da categoria inteira de Filosofia da Ciência Cognitiva. O arquivo anexado `LDDC-6Gd.rss` foi lido com `feedparser` e com o parser do coletor: 500 registros RSS 1.0/RDF, sem datas utilizáveis. Os itens são classificados por data de descoberta, sem comprovar publicação nos últimos sete dias. A URL remota ainda precisa de validação no GitHub Actions.
