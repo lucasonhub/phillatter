@@ -6,7 +6,9 @@ authors:
 date: '2026-10-14'
 type: article
 category: &id001
+- Ciências Cognitivas
 - Inteligência Artificial
+- Neurociência
 doi: 10.1007/s11023-026-09804-w
 abstract: 'Abstract A persistent ambition in artificial intelligence research holds
   that large language models (LLMs) will eventually become embodied—through attachment

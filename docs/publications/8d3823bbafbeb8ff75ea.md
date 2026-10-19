@@ -7,7 +7,6 @@ category: &id001
 - Filosofia da Consciência, Miscelânea
 doi: null
 abstract: ''
-abstract_basis: unavailable
 date_basis: discovered
 source:
 - PhilPapers
@@ -16,6 +15,7 @@ source_ids:
 url: https://philpapers.org/rec/NIETEM
 discovered_at: '2026-10-16'
 tags: *id001
+abstract_basis: unavailable
 ---
 
 # Nielsen, Jenny Lorraine: The Extended Mind Hypothesis: An Objection and Defense

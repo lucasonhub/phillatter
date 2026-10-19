@@ -1,0 +1,48 @@
+---
+title: 'In-Context Learning Before Specialisation: Theory of Learning in a Solvable
+  Topic Model'
+authors:
+- Francesco Cagnetta
+- Casper L. Christensen
+date: '2026-10-15'
+type: preprint
+category: &id001
+- Inteligência Artificial
+doi: null
+abstract: 'Sequence models can generalise in fundamentally distinct ways: extrapolating
+  structures seen in training, or using their prompt to adapt to novel tasks. The
+  prevailing strategy determines how the model behaves beyond its training distribution,
+  controlling potential capabilities and risks. Recent work has characterised many
+  different strategies theoretically, and empirically described the transition between
+  them as the quality and quantity of pretraining data vary. However, there is no
+  learning theory for this competition, hence no fundamental understanding of \textit{why}
+  one solution might be favoured over another. Here we provide such a theory in a
+  solvable topic model---documents drawn from a finite mixture of latent topics, mirroring
+  the heterogeneity of modern pretraining data. The dataset comes with two distinct
+  solutions: a specialised predictor, that stores the finite topic mixture, and an
+  in-context one, optimal for topics never seen during training. Our theory predicts
+  their emergence at distinct sample complexities: the in-context predictor is available
+  early, while the specialised one emerges only after the training tokens outnumber
+  the parameters of the data-generating process. Trained transformers reproduce both
+  scales and the separating crossover in remarkable agreement with the theory, with
+  no fitted parameters.'
+source:
+- arXiv
+source_ids:
+- arxiv:2610.21901
+url: https://arxiv.org/abs/2610.21901
+discovered_at: '2026-10-19'
+tags: *id001
+---
+
+# In\-Context Learning Before Specialisation: Theory of Learning in a Solvable Topic Model
+
+**Autores:** Francesco Cagnetta; Casper L\. Christensen
+
+**Data:** 2026-10-15 · **Tipo:** preprint
+
+## Resumo
+
+Sequence models can generalise in fundamentally distinct ways: extrapolating structures seen in training, or using their prompt to adapt to novel tasks\. The prevailing strategy determines how the model behaves beyond its training distribution, controlling potential capabilities and risks\. Recent work has characterised many different strategies theoretically, and empirically described the transition between them as the quality and quantity of pretraining data vary\. However, there is no learning theory for this competition, hence no fundamental understanding of \\textit\{why\} one solution might be favoured over another\. Here we provide such a theory in a solvable topic model\-\-\-documents drawn from a finite mixture of latent topics, mirroring the heterogeneity of modern pretraining data\. The dataset comes with two distinct solutions: a specialised predictor, that stores the finite topic mixture, and an in\-context one, optimal for topics never seen during training\. Our theory predicts their emergence at distinct sample complexities: the in\-context predictor is available early, while the specialised one emerges only after the training tokens outnumber the parameters of the data\-generating process\. Trained transformers reproduce both scales and the separating crossover in remarkable agreement with the theory, with no fitted parameters\.
+
+[Consultar publicação](<https://arxiv.org/abs/2610.21901>)
