@@ -1,4 +1,4 @@
-# Mente Semanal — curadoria para o mestrado
+# Phillater
 
 O projeto publica **dez artigos por semana**, escolhidos pela relação com a pesquisa sobre teoria computacional da mente, representação simbólica, computação, intencionalidade e limites do computacionalismo. Artigos antigos são elegíveis: não há filtro por data de publicação.
 

@@ -29,7 +29,7 @@ def main():
     base = os.environ.get('SITE_URL', '').rstrip('/') + '/'
     if urlparse(base).scheme != 'https' or not urlparse(base).netloc:
         raise SystemExit('Defina SITE_URL com a URL pública HTTPS.')
-    text = [f'Mente Semanal — {args.edition}', base + f'editions/{args.edition}/', '']
+    text = [f'Phillater — {args.edition}', base + f'editions/{args.edition}/', '']
     for uid in edition['ids']:
         r = read_note(ROOT / f'docs/publications/{uid}.md')
         text += [r['title'], '; '.join(r['authors']),
@@ -66,7 +66,7 @@ def main():
             if token in state:
                 continue
             message = EmailMessage()
-            message['Subject'] = f'Mente Semanal — {args.edition}'
+            message['Subject'] = f'Phillater — {args.edition}'
             message['From'], message['To'] = sender, recipient
             message['Message-ID'] = f'<{token}@{sender.split("@")[1]}>'
             message['List-Unsubscribe'] = f'<mailto:{unsubscribe}?subject=descadastrar>'

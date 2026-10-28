@@ -1,4 +1,4 @@
-# Mente Semanal
+# Phillater
 
 Dez artigos por semana sobre os fundamentos, alcance e limites da teoria computacional da mente, orientados pelas perguntas da dissertação.
 

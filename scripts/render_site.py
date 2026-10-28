@@ -34,7 +34,7 @@ def render(root=ROOT, site_url='http://127.0.0.1:8000/'):
     for uid, note in sorted(notes.items(), key=order, reverse=True):
         for category in note['category']:
             by_category[category].append((uid, note))
-    index = ['# Mente Semanal', 'Dez artigos por semana sobre os fundamentos, alcance e limites da teoria computacional da mente, orientados pelas perguntas da dissertação.',
+    index = ['# Phillater', 'Dez artigos por semana sobre os fundamentos, alcance e limites da teoria computacional da mente, orientados pelas perguntas da dissertação.',
              '[Ler edições](editions/index.md) · [Explorar temas](categories.md) · [Assinar RSS](feed.xml)',
              'Use a busca no topo para pesquisar títulos, autores e resumos.',
              '## Artigos selecionados', '<label for="topic">Filtrar por tema</label>',
@@ -61,12 +61,12 @@ def render(root=ROOT, site_url='http://127.0.0.1:8000/'):
     archive = ['# Edições semanais']
     rss = ET.Element('rss', version='2.0')
     channel = ET.SubElement(rss, 'channel')
-    for tag, text in [('title', 'Mente Semanal'), ('link', site_url), ('language', 'pt-br'),
+    for tag, text in [('title', 'Phillater'), ('link', site_url), ('language', 'pt-br'),
                       ('description', 'Curadoria acadêmica: teoria computacional da mente, representação simbólica e intencionalidade')]:
         ET.SubElement(channel, tag).text = text
     for edition in editions:
         day = edition['date']
-        title = f'Mente Semanal — {day}'
+        title = f'Phillater — {day}'
         archive.append(f'- [{title}]({day}.md) — {len(edition["ids"])} artigos selecionados')
         if edition.get('selection_mode') == 'research_relevance':
             scope = (f'Semana editorial: {edition["week_start"]} até {edition["week_end_exclusive"]} '
