@@ -1,0 +1,177 @@
+# Perfil construído a partir das seis perguntas de pesquisa fornecidas pelo usuário.
+name: Fundamentos, alcance e limites da teoria computacional da mente
+articles_per_week: 10
+minimum_score: 10
+allowed_types:
+- article
+- preprint
+openalex_queries:
+- '"computational theory of mind"'
+- '"computationalism"'
+- '"language of thought"'
+- '"symbol grounding"'
+- '"mental content" computation'
+- '"intentionality" computation'
+- '"physical computation"'
+- '"computational implementation" mind'
+- '"pancomputationalism"'
+- '"computation" "consciousness"'
+arxiv_query: all:"computational theory of mind" OR all:"computationalism" OR all:"language
+  of thought" OR all:"symbol grounding" OR (all:"intentionality" AND all:"computation")
+  OR all:"physical computation" OR all:"pancomputationalism" OR (all:"computation"
+  AND all:"consciousness")
+groups:
+  computation:
+    label: Computação e teoria computacional da mente
+    weight: 5
+    terms:
+    - computational theory of mind
+    - computational theories of mind
+    - computationalism
+    - computationalist
+    - mental computation
+    - computational explanation
+    - teoria computacional da mente
+    - computacionalismo
+    - computação mental
+  formal_computation:
+    label: Computação e formalização
+    weight: 3
+    terms:
+    - computation
+    - computational
+    - computação
+    - computacional
+  symbols:
+    label: Representação simbólica e estrutura do pensamento
+    weight: 4
+    terms:
+    - symbolic representation
+    - symbolic representations
+    - symbol manipulation
+    - language of thought
+    - mental representation
+    - mental representations
+    - symbol grounding
+    - vector grounding
+    - systematicity
+    - compositionality
+    - representação simbólica
+    - representação mental
+    - linguagem do pensamento
+    - analog representation
+    - non-conceptual representation
+    - nonconceptual content
+    - mental imagery
+    - representational format
+    - representações analógicas
+    - representações não conceituais
+  intentionality:
+    label: Intencionalidade e conteúdo semântico
+    weight: 4
+    terms:
+    - intentionality
+    - mental content
+    - semantic content
+    - intentional content
+    - referential grounding
+    - aboutness
+    - intencionalidade
+    - conteúdo mental
+    - conteúdo semântico
+  limits:
+    label: Limites, críticas e alternativas ao computacionalismo
+    weight: 3
+    terms:
+    - chinese room
+    - causal relevance
+    - causal efficacy
+    - embodied cognition
+    - enactivism
+    - computational indeterminacy
+    - non-computational
+    - sala chinesa
+    - cognição incorporada
+    - eficácia causal
+    - enativismo
+  physical_computation:
+    label: Individuação e implementação de sistemas computacionais
+    weight: 5
+    terms:
+    - physical computation
+    - what is computation
+    - pancomputationalism
+    - computational implementation
+    - computational individuation
+    - implementation theory
+    - mechanistic account of computation
+    - triviality argument
+    - computação física
+    - sistemas não computacionais
+    - implementação computacional
+  mental_scope:
+    label: Alcance da computação e explicação dos fenômenos mentais
+    weight: 4
+    terms:
+    - computational consciousness
+    - phenomenal consciousness
+    - conscious experience
+    - cognitive phenomenology
+    - mental phenomena
+    - perceptual computation
+    - cognitive architecture
+    - functionalism
+    - multiple realizability
+    - digital and analog
+    - analog computation
+    - consciência fenomenal
+    - experiência consciente
+    - fenômenos mentais
+    - funcionalismo
+    - múltipla realização
+required_any:
+- - computation
+- - symbols
+  - intentionality
+- - formal_computation
+  - symbols
+- - formal_computation
+  - intentionality
+- - formal_computation
+  - limits
+- - physical_computation
+- - formal_computation
+  - mental_scope
+research_questions:
+- O que são sistemas computacionais e como diferem dos sistemas não computacionais?
+- Todos os aspectos da mente são computacionais ou apenas os que envolvem raciocínio
+  complexo?
+- As computações mentais processam representações?
+- Que tipos de representações a mente processa?
+- Como diferentes processos computacionais produzem diferentes fenômenos mentais?
+- Quais argumentos podem ser levantados a favor e contra a teoria computacional da
+  mente?
+research_axes:
+- question: O que são sistemas computacionais e como diferem dos sistemas não computacionais?
+  groups:
+  - physical_computation
+- question: Todos os aspectos da mente são computacionais ou apenas os que envolvem
+    raciocínio complexo?
+  groups:
+  - mental_scope
+  - formal_computation
+- question: As computações mentais processam representações?
+  groups:
+  - symbols
+  - formal_computation
+- question: Que tipos de representações a mente processa?
+  groups:
+  - symbols
+- question: Como diferentes processos computacionais produzem diferentes fenômenos
+    mentais?
+  groups:
+  - mental_scope
+- question: Quais argumentos podem ser levantados a favor e contra a teoria computacional
+    da mente?
+  groups:
+  - limits

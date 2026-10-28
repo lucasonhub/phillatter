@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       collect:
-        description: Consultar APIs antes de construir o site
+        description: Selecionar dez artigos para a semana antes de construir o site
         type: boolean
         default: true
   push:
@@ -18,7 +18,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 30
     permissions:
       contents: write
     env:
@@ -39,7 +39,7 @@ jobs:
           python -c 'import os; from urllib.parse import urlparse; u=urlparse(os.environ["SITE_URL"]); assert u.scheme == "https" and u.netloc, "Configure vars.SITE_URL com a URL pública HTTPS"'
       - name: Testes locais
         run: python -m unittest discover -s tests -v
-      - name: Coletar últimos sete dias completos
+      - name: Selecionar dez artigos por relevância para a pesquisa
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.collect)
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}

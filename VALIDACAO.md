@@ -1,13 +1,10 @@
-# Validação da entrega
+# Validação da reformulação
 
-- Python 3.12: dez testes unitários passaram.
-- `mkdocs build --strict`: passou com acervo vazio.
-- Build adicional com uma publicação e edição simuladas: passou; confirmados arquivo de publicação, links com subdiretório, marcação do filtro, índice de busca e RSS.
-- Prévia SMTP com edição simulada: passou, sem enviar mensagem.
-- Dependências efetivamente usadas registradas em `requirements.lock.txt`.
-- Sem consultas reais ao OpenAlex/arXiv/PhilPapers, sem envio SMTP real e sem publicação no GitHub Pages.
-- Não houve validação visual em navegador. O filtro foi verificado no código e na marcação gerada, sem teste de interação em navegador.
-
-A amostra simulada foi criada em diretório temporário e não integra o acervo entregue.
-
-A extensão PhilPapers verifica limites de data, entradas sem data, Atom com atualização, remoção de HTML, rejeição de feed inválido, descoberta do link RSS, URL explícita, duas categorias, integração no coletor, deduplicação entre fontes e preferência por abstract/tipo conhecidos.
+- Curadoria automática por perfil explícito, sem filtro de data dos artigos.
+- Limite de dez artigos por semana editorial, com controle de reexecuções e repetição.
+- 30 testes unitários passaram, incluindo 12 testes da nova curadoria.
+- Build estrito validado com acervo vazio e com uma edição sintética de dez artigos históricos.
+- Conteúdo sintético usado apenas em diretório temporário; não foi publicado.
+- A seleção não é uma avaliação semântica por IA nem uma leitura humana dos textos integrais.
+- O perfil registra as seis perguntas da dissertação fornecidas pelo usuário e busca diversidade entre essas frentes.
+- As fontes continuam sujeitas a disponibilidade, metadados e cotas de acesso. A validação com dados simulados não garante disponibilidade futura das APIs.

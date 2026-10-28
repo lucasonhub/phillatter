@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Coleta paginada; janela de dias UTC completos [end-days, end)."""
+"""Parsers das fontes; a CLI publica a curadoria semanal definida em curate.py."""
 import argparse
 import calendar
 from datetime import date, datetime, timedelta, timezone
@@ -231,7 +231,7 @@ def philpapers_records(content, category, start, end, observed_on=None):
         basis = 'feed_published' if entry.get('published_parsed') else 'feed_updated'
         if stamp:
             day = datetime.fromtimestamp(calendar.timegm(stamp), timezone.utc).date()
-            if not start <= day < end:
+            if start is not None and end is not None and not start <= day < end:
                 continue
         else:
             # RSS pode omitir datas. Incluir alertas ainda disponíveis e deduplicar.
@@ -461,35 +461,19 @@ def save_records(records, root):
                 f"**{date_label}:** {r['date']} · **Tipo:** {r['type']}\n\n"
                 f"## {summary_label}\n\n{markdown(r['abstract'] or 'Resumo indisponível na fonte.')}\n\n"
                 f"[Consultar publicação](<{source}>)\n")
+        if r.get('selection_reasons'):
+            body += '\n## Relação com a pesquisa\n\n' + '\n'.join(
+                '- ' + markdown(reason) for reason in r['selection_reasons']) + '\n'
+        if r.get('selection_questions'):
+            body += '\n## Perguntas da dissertação\n\n' + '\n'.join(
+                '- ' + markdown(question) for question in r['selection_questions']) + '\n'
         write(directory / f'{uid}.md', frontmatter(r, body))
     return new_ids
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--days', type=int, default=7)
-    parser.add_argument('--end', type=date.fromisoformat, default=datetime.now(timezone.utc).date())
-    args = parser.parse_args()
-    if args.days < 1:
-        parser.error('--days deve ser positivo')
-    config = yaml.safe_load((ROOT / 'topics.yml').read_text())
-    contact = os.environ.get('CONTACT_EMAIL', '')
-    if '@' not in contact:
-        raise SystemExit('Defina CONTACT_EMAIL com um contato válido para as APIs.')
-    start = args.end - timedelta(days=args.days)
-    try:
-        records = collect(Client(contact), config, start, args.end)
-    except RuntimeError as exc:
-        raise SystemExit(str(exc)) from None
-    except requests.RequestException:
-        raise SystemExit('Falha de rede; nenhuma edição foi gravada. Consulte as APIs sem expor a chave.')
-    ids = save_records(records, ROOT)
-    manifest = ROOT / f'data/editions/{args.end}.json'
-    old = json.loads(manifest.read_text()) if manifest.exists() else {}
-    edition = dict(date=str(args.end), start=str(start), end_exclusive=str(args.end),
-                   ids=sorted(set(old.get('ids', [])) | set(ids)))
-    write(manifest, json.dumps(edition, ensure_ascii=False, indent=2) + '\n')
-    print(f'{len(records)} ocorrências; {len(ids)} publicações novas; edição {args.end}.')
+    from curate import main as curate_main
+    curate_main()
 
 
 if __name__ == '__main__':
