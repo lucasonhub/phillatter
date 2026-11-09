@@ -4,6 +4,26 @@ Selecione um tema na página inicial ou navegue pelos títulos abaixo.
 
 ## Fundamentos, alcance e limites da teoria computacional da mente
 
+- [No computation without implementation? A potential problem for the single hierarchy view of physical computation](publications/9d85722750b625a13888.md)
+
+- [How causal abstraction underpins computational explanation](publications/6c20f23c6eb07fcc5888.md)
+
+- [Symbolic and sub\-symbolic knowledge organization in the computational theory of mind](publications/d0c2aabdd5ad77759adb.md)
+
+- [Fodor’s Non\-Conceptual Representations and the Computational Theory of Mind](publications/cbfcc037dc75f3e7c5cc.md)
+
+- [Against Structuralist Theories of Computational Implementation](publications/a31f926497d7ce05a397.md)
+
+- [A Computational Implementation of the CCV Framework: Preliminary Evidence for Emergent Psychological Dynamics from Meaning Architecture](publications/87817fde730e169900b3.md)
+
+- [Meaning and cognitive structure : issues in the computational theory of mind](publications/77e00b5f89f0b0653203.md)
+
+- [TOMA: Computational Theory of Mind with Abstractions for Hybrid Intelligence](publications/4cb75bb97b850fe09826.md)
+
+- [Computational Explanation of Consciousness: A Predictive Processing\-based Understanding of Consciousness](publications/412f9bee4bcad9abc335.md)
+
+- [Question and Revision to the Computational Theory of Mind](publications/9f79319e6a125f65261b.md)
+
 - [Computationalism, implementation, and the literal interpretation of computational models in neuroscience: Distinctions with a difference](publications/21ecbf507e640d2bee6a.md)
 
 - [Intentionality and computationalism: minds, machines, Searle and Harnad](publications/c655d9eb2c02db23e716.md)
