@@ -4,6 +4,26 @@ Selecione um tema na página inicial ou navegue pelos títulos abaixo.
 
 ## Fundamentos, alcance e limites da teoria computacional da mente
 
+- [Does Separating Intentionality From Mental Representation Imply Radical Enactivism?](publications/e69b50accbe7d0dba9a3.md)
+
+- [Nonreductive Materialism And The Computational Theory Of Mind](publications/b19404b0c68522590028.md)
+
+- [Computationalism as Structural Non\-Explanation\_ Why Computation\-First Accounts of Mind Cannot Converge to Ontology](publications/66b993369f30de8ba76b.md)
+
+- [Phenomenology as Proto\-Computationalism: Do the Prolegomena Indicate a Computational Reading of the Logical Investigations?](publications/0678857f3c932905bc23.md)
+
+- [Functionalism, computationalism, and mental states](publications/7d212076607924548ecb.md)
+
+- [Intentionality and Computationalism\. A Diagonal Argument\.](publications/2fd5e099830012fa09f4.md)
+
+- [ПРОБЛЕМА РОЗУМІННЯ В КОНТЕКСТІ КРИТИКИ КОМП&\#x27;ЮТАЦІОНАЛІЗМУ\.\(The problem of understanding in the context of computational theory of mind criticism\.\)](publications/28c21bea5e33137e6dca.md)
+
+- [Computational modeling of the mind: what role for mental representation?](publications/40e808cffbbeb2190396.md)
+
+- [Making too many enemies: Hutto and Myin’s attack on computationalism](publications/2f92c6f2f50a2742fb7f.md)
+
+- [What is computation?](publications/c256dbff24f4e9b40df2.md)
+
 - [No computation without implementation? A potential problem for the single hierarchy view of physical computation](publications/9d85722750b625a13888.md)
 
 - [How causal abstraction underpins computational explanation](publications/6c20f23c6eb07fcc5888.md)

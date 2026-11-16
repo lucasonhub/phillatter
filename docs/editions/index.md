@@ -1,5 +1,7 @@
 # Edições semanais
 
+- [Phillater — 2026-11-16](2026-11-16.md) — 10 artigos selecionados
+
 - [Phillater — 2026-11-09](2026-11-09.md) — 10 artigos selecionados
 
 - [Phillater — 2026-11-02](2026-11-02.md) — 10 artigos selecionados

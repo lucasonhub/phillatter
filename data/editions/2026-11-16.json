@@ -1,0 +1,107 @@
+{
+  "date": "2026-11-16",
+  "week_start": "2026-11-16",
+  "week_end_exclusive": "2026-11-23",
+  "selected_at": "2026-11-16",
+  "selection_mode": "research_relevance",
+  "research_focus": "Fundamentos, alcance e limites da teoria computacional da mente",
+  "ids": [
+    "c256dbff24f4e9b40df2",
+    "66b993369f30de8ba76b",
+    "40e808cffbbeb2190396",
+    "e69b50accbe7d0dba9a3",
+    "7d212076607924548ecb",
+    "28c21bea5e33137e6dca",
+    "0678857f3c932905bc23",
+    "b19404b0c68522590028",
+    "2fd5e099830012fa09f4",
+    "2f92c6f2f50a2742fb7f"
+  ],
+  "candidate_count": 1000,
+  "sources": [
+    {
+      "source": "OpenAlex",
+      "query": "\"computational theory of mind\"",
+      "status": "ok",
+      "candidates": 100
+    },
+    {
+      "source": "OpenAlex",
+      "query": "\"computationalism\"",
+      "status": "ok",
+      "candidates": 100
+    },
+    {
+      "source": "OpenAlex",
+      "query": "\"language of thought\"",
+      "status": "ok",
+      "candidates": 100
+    },
+    {
+      "source": "OpenAlex",
+      "query": "\"symbol grounding\"",
+      "status": "ok",
+      "candidates": 100
+    },
+    {
+      "source": "OpenAlex",
+      "query": "\"mental content\" computation",
+      "status": "ok",
+      "candidates": 100
+    },
+    {
+      "source": "OpenAlex",
+      "query": "\"intentionality\" computation",
+      "status": "ok",
+      "candidates": 100
+    },
+    {
+      "source": "OpenAlex",
+      "query": "\"physical computation\"",
+      "status": "ok",
+      "candidates": 100
+    },
+    {
+      "source": "OpenAlex",
+      "query": "\"computational implementation\" mind",
+      "status": "ok",
+      "candidates": 100
+    },
+    {
+      "source": "OpenAlex",
+      "query": "\"pancomputationalism\"",
+      "status": "ok",
+      "candidates": 100
+    },
+    {
+      "source": "OpenAlex",
+      "query": "\"computation\" \"consciousness\"",
+      "status": "ok",
+      "candidates": 100
+    },
+    {
+      "source": "arXiv",
+      "status": "unavailable"
+    },
+    {
+      "source": "PhilPapers",
+      "category": "Filosofia da Inteligência Artificial",
+      "status": "unavailable"
+    },
+    {
+      "source": "PhilPapers",
+      "category": "Filosofia da Ciência Cognitiva, Miscelânea",
+      "status": "unavailable"
+    },
+    {
+      "source": "PhilPapers",
+      "category": "Filosofia da Consciência",
+      "status": "unavailable"
+    },
+    {
+      "source": "PhilPapers",
+      "category": "Filosofia da Consciência, Miscelânea",
+      "status": "unavailable"
+    }
+  ]
+}
