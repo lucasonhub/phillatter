@@ -4,6 +4,26 @@ Selecione um tema na página inicial ou navegue pelos títulos abaixo.
 
 ## Fundamentos, alcance e limites da teoria computacional da mente
 
+- [Symbol Grounding in Computational Systems: A Paradox of Intentions](publications/6f719464ab8f7c296114.md)
+
+- [On Computational Mechanisms for Shared Intentionality, and Speculation on Rationality and Consciousness](publications/ed9d7dfe671354d9d4a9.md)
+
+- [Computationalism reconsidered connectionism and the use ofcComputer science concepts in explanations of the mind](publications/6a1db4fb8f9eea40aff6.md)
+
+- [From Maps to Metabolism: Historical Precedents and a Unified Critique of Computationalism](publications/336f0183f737c6b7a3b4.md)
+
+- [Computationalism, Enactivism, and Cognition: Turing Machines as Functionally Closed Systems\.](publications/f8cdb712f3aeb23e44e7.md)
+
+- [Modeling working memory: a computational implementation of the Time\-Based Resource\-Sharing theory](publications/dd025485ec635428ef30.md)
+
+- [Physical Computation: How General are Gandy’s Principles for Mechanisms?](publications/c0525a59ad9496e92354.md)
+
+- [A new framework for large strain electromechanics based on convex multi\-variable strain energies: Finite Element discretisation and computational implementation](publications/64f5998f299306eabb85.md)
+
+- [An in silico central pattern generator: silicon oscillator, coupling, entrainment, and physical computation](publications/5d5fc37bed278b461164.md)
+
+- [Coining Terms In The Language of Thought: Innateness, Emergence, and the Lot of Cummins’s Argument Against the Causal Theory of Mental Content](publications/1aed35379d2e13005705.md)
+
 - [Does Separating Intentionality From Mental Representation Imply Radical Enactivism?](publications/e69b50accbe7d0dba9a3.md)
 
 - [Nonreductive Materialism And The Computational Theory Of Mind](publications/b19404b0c68522590028.md)
